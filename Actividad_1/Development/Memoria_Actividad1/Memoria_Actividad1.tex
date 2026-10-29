@@ -126,11 +126,107 @@
 
 % =========================================================================
 \section{Caso 1}
-\subsection{Trazabilidad de algoritmos}
+\subsection{Resultado de Algoritmos}
 % =========================================================================
-A continuacion se presenta la trazabilidad de ejecucion para el algoritmo de busqueda de amplitud.
+El caso 1 ejecuta los algoritmos de Búsqueda en Amplitud y Búsqueda en profundidad. Ambos algoritmos se analizaran en este caso para responder las preguntas requeridas. Primero se presenta los resultados de ejecucion para el algoritmo de Búsqueda en Amplitud, estos resultados surgen de el trabajo a mano generado en trazar el algoritmo.
+\noindent  
+\begin{table}[htpb]
+\centering
+\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
+\hline
+\textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
+\textbf{Longitud} & 10 \\ \hline
+\textbf{Coste solución} & 9.0 \\ \hline
+\textbf{Nodos expandidos} & 26 \\ \hline
+\textbf{Tamaño máximo de lista abierta} & 7 \\ \hline
+\end{tabularx}
+\caption{Resumen de resultados Caso 1 - Algoritmo de Búsqueda en Amplitud}
+\end{table}\\
+La tabla de trazabilidad que se puede consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}}. 
+Los resultados del algoritmo Búsqueda en Amplitud se analizan de la siguiente manera:
+\begin{itemize}
+    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 10 pasos con un coste total de 9.0, confirmando que es la ruta óptima. Dado que este método se expande nivel por nivel, garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores tendría obligatoriamente un coste mayor al requerir más nodos para procesar.
+    \item \textbf{Eficiencia:} Para asegurar esta solución óptima, la búsqueda en amplitud sacrifica recursos de tiempo y memoria. Al explorar de forma exhaustiva y amplia por nivel, el coste computacional se elevada, requiriendo expandir 26 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 7 nodos para poder mantener los nodos a visitar.
+    \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los estados ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
+\end{itemize}
+A continuacion se presenta los resultados del algoritmo de Búsqueda en Profundidad, estos resultados surgen de el trabajo a mano generado en trazar el algoritmo.  
+\noindent  
+\begin{table}[htpb]
+\centering
+\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
+\hline
+\textbf{Solución} & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (5,5) $\rightarrow$ (5,6) $\rightarrow$ (5,7) $\rightarrow$ (4,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
+\textbf{Longitud} & 16 \\ \hline
+\textbf{Coste solución} & 15.0 \\ \hline
+\textbf{Nodos expandidos} & 19 \\ \hline
+\textbf{Tamaño máximo de lista abierta} & 12 \\ \hline
+\end{tabularx}
+\caption{Resumen de resultados Caso 1 - Algoritmo de Búsqueda en Profundidad}
+\end{table}\\
+La tabla de trazabilidad que se puede consultar en la \hyperref[anx:profundidad_caso1]{Traza para Búsqueda en Profundidad Caso 1 Anexo \ref{anx:profundidad_caso1}}. Los resultados del algoritmo en profundidad se analizan de la siguiente manera:
+\begin{itemize}
+    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 16 pasos con un coste total de 15.0, lo que no confirma que es la ruta óptima. Dado que este método se expande desde el nodo base hasta lo mas profundo de una ruta, este no garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores podria ser mas corta que la primera ruta profunda encontrada.
+    \item \textbf{Eficiencia:} La búsqueda en profundidad sacrifica optimalidad para avanzar de manera directa en profundidad buscando una solucion, lo que en este caso en particular requirio menos nodos expandidos. Al explorar de forma exhaustiva y profunda ruta por ruta, el coste computacional es menor, requiriendo expandir 19 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 12 nodos para poder mantener los nodos a visitar.   
+    \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
+\end{itemize}
+\subsection{Evaluación de ambos algoritmos}
+Al evaluar el coste de ejecución, el algoritmo de búsqueda en profundidad demostró ser más eficiente en tiempo, ya que requirió expandir menos nodos (19 iteraciones frente a las 26 del algoritmo en amplitud). Sin embargo, en cuanto a la eficiencia de memoria, el algoritmo en amplitud fue superior, pues el tamaño máximo de su lista abierta fue de solo 7 nodos, contrastando con los 12 nodos que necesitó almacenar el algoritmo de profundidad.
+Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más eficiente en este caso particular sin antes establecer qué recurso es prioritario optimizar. En resumen:
+\begin{itemize}
+    \item El algoritmo de Búsqueda en Profundidad fue más eficiente en tiempo (expandió menos nodos).
+	\item El algoritmo de Búsqueda en Amplitud fue más eficiente en memoria (su lista abierta fue más pequeña).
+\end{itemize}
+Será el análisis del caso a caso el que dictaminará si el proceso requiere priorizar un menor consumo de memoria o un menor tiempo de procesamiento. En base a esa información y a los requerimientos del sistema, se podrá escoger el algoritmo que mejor cumpla con lo pedido.
+Finalmente, cabe destacar que tanto la búsqueda en amplitud como en profundidad son algoritmos no informados, lo que significa que basan la expansión de sus rutas exclusivamente en la topología del mapa y no evalúan ni comparan los costes de las transiciones para tomar decisiones. El registro del "coste de solución" en los resultados de este caso es puramente descriptivo, dado que nos encontramos ante un entorno de costes uniformes (donde cada paso tiene un valor idéntico de 1), el algoritmo de Búsqueda en Amplitud logró la ruta óptima simplemente por su naturaleza de encontrar el camino con la menor cantidad de pasos, no porque disponga de un mecanismo computacional diseñado para minimizar costes.
+% =========================================================================
+\section{Caso 2}
+El caso 2 ejecuta los algoritmos de Búsqueda en amplitud, Búsqueda de Coste Uniforme y Búsqueda A*. Los tres algoritmos se analizaran en este caso para responder las preguntas requeridas. Primero se presenta los  resultados de ejecucion para el algoritmo de Búsqueda en Amplitud.
+Como se destaco en el Caso 1, el Algoritmo de Búsqueda en Amplitud es un algoritmo de busqueda no informado lo que hace que el costo de transicion no se evaluan para tomar decisiones, entonces en el Caso 2 donde los costos no son uniformes la ejecucion del algoritmo no se altera y el resultado es el mismo. Por lo tanto es valido reutilizar la tabla de trazabilidad \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}} y su interpretacion en optimilidad, eficiancia y completitud.
+La unica diferencia es que el coste de solucion en vez de ser 9.0 ahora es 15.0 como lo expresa la siguiente tabla de resultados para el algoritmo.
+\noindent  
+\begin{table}[htpb]
+\centering
+\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
+\hline
+\textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
+\textbf{Longitud} & 10 \\ \hline
+\textbf{Coste solución} & 15.0 \\ \hline
+\textbf{Nodos expandidos} & 26 \\ \hline
+\textbf{Tamaño máximo de lista abierta} & 7 \\ \hline
+\end{tabularx}
+\caption{Resumen de resultados Caso 2 - Algoritmo de Búsqueda en Amplitud}
+\end{table}
+% =========================================================================
 
-\tablaiteraciones{Traza de iteraciones Caso 1 - Algoritmo de Busqueda en Amplitud}{tab:iter_caso1_bf}{
+% =========================================================================
+\section{Caso 3}
+% =========================================================================
+
+\tablaiteraciones{Traza de iteraciones -- Caso 3}{tab:iter_caso3}{\filasvacias}
+
+% =========================================================================
+\section{Declaración de uso de IA}
+% =========================================================================
+
+
+% =========================================================================
+% ANEXOS (no cuentan en la extensión máxima)
+% =========================================================================
+\clearpage
+\appendix
+% "Anexo A. Título" en lugar de "A Título"
+\renewcommand{\thesection}{\Alph{section}}
+\makeatletter
+\renewcommand{\@seccntformat}[1]{%
+  \ifcsname prefix@#1\endcsname\csname prefix@#1\endcsname\fi
+  \csname the#1\endcsname.\quad}
+\newcommand{\prefix@section}{Anexo~}
+\makeatother
+
+\section{Traza Busqueda en Amplitud Caso 1 y 2}
+\label{anx:amplitud_caso1_2}
+
+\tablaiteraciones{Traza de iteraciones - Algoritmo de Busqueda en Amplitud}{tab:iter_caso1_bf}{
 0  &  &  & (1, 2) &  \\ \hline
 1  & \textbf{(1, 2)} & \textbf{(1, 3)}, (1, 1) & (1, 3), (1, 1) & (1, 2) \\ \hline
 2  & \textbf{(1, 3)} & (2, 3), \textbf{(1, 4)} & (1, 1), (2, 3), (1, 4) & (1, 3) \\ \hline
@@ -160,105 +256,29 @@ A continuacion se presenta la trazabilidad de ejecucion para el algoritmo de bus
 26 & (4, 6) & (4, 5) & (3, 5), (6, 4), (4, 4), (5, 5), (5, 6), (4, 5) & (4, 6) \\ \hline
 27 & \textbf{(3, 5)} & Meta  & Busqueda termina & (3, 5) \\ \hline
 }
-Los resultados del algoritmo de amplitud se pueden analizar de la siguiente manera:
-\begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 10 pasos con un coste total de 9.0, confirmando que es la ruta óptima. Dado que este método se expande nivel por nivel, garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores tendría obligatoriamente un coste mayor al requerir más nodos para procesar.
-    
-    \item \textbf{Eficiencia:} Para asegurar esta solución óptima, la búsqueda en amplitud sacrifica recursos de tiempo y memoria. Al explorar de forma exhaustiva y amplia por nivel, el coste computacional fue elevado, requiriendo expandir 26 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 7 nodos para poder mantener los nodos a visitar.
-    
-    \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los estados ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
-\end{itemize}
-\noindent  
-\begin{table}[htpb]
-\centering
-\caption{Resumen de resultados - Algoritmo de Búsqueda en Amplitud}
-\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
-\textbf{Longitud} & 10 \\ \hline
-\textbf{Coste solución} & 9.0 \\ \hline
-\textbf{Nodos expandidos} & 26 \\ \hline
-\textbf{Tamaño máximo de lista abierta} & 7 \\ \hline
-\end{tabularx}
-\end{table}
-
-A continuacion se presenta la trazabilidad de ejecucion para el algoritmo de busqueda en profundidad.
-
-\tablaiteraciones{Traza de iteraciones Caso 1 - Algoritmo de Busqueda en Profundidad}{tab:iter_caso1_bf}{
+\section{Traza Busqueda en Profundidad Caso 1}
+\label{anx:profundidad_caso1}
+\tablaiteraciones{Traza de iteraciones - Algoritmo de Busqueda en Profundidad}{tab:iter_caso1_bf}{
 0  &  &  & (1, 2) &  \\ \hline
-1 & (1, 2) & (1, 3), (1, 1) & (1, 3), (1, 1) & (1, 2) \\ \hline
-2 & (1, 1) & (2, 1) & (1, 3), (2, 1) & (1, 1) \\ \hline
-3 & (2, 1) & (3, 1) & (1, 3), (3, 1) & (2, 1) \\ \hline
-4 & (3, 1) & (4, 1), (3, 2) & (1, 3), (4, 1), (3, 2) & (3, 1) \\ \hline
+1 & \textbf{(1, 2)} & (1, 3), \textbf{(1, 1)} & (1, 3), (1, 1) & (1, 2) \\ \hline
+2 & \textbf{(1, 1)} & \textbf{(2, 1)} & (1, 3), (2, 1) & (1, 1) \\ \hline
+3 & \textbf{(2, 1)} & \textbf{(3, 1)} & (1, 3), (3, 1) & (2, 1) \\ \hline
+4 & \textbf{(3, 1)} & \textbf{(4, 1)}, (3, 2) & (1, 3), (4, 1), (3, 2) & (3, 1) \\ \hline
 5 & (3, 2) & (3, 3) & (1, 3), (4, 1), (3, 3) & (3, 2) \\ \hline
 6 & (3, 3) & (2, 3) & (1, 3), (4, 1), (2, 3) & (3, 3) \\ \hline
 7 & (2, 3) & None & (1, 3), (4, 1) & (2, 3) \\ \hline
-8 & (4, 1) & (5, 1) & (1, 3), (5, 1) & (4, 1) \\ \hline
-9 & (5, 1) & (6, 1), (5, 2) & (1, 3), (6, 1), (5, 2) & (5, 1) \\ \hline
-10 & (5, 2) & (6, 2), (5, 3) & (1, 3), (6, 1), (6, 2), (5, 3) & (5, 2) \\ \hline
-11 & (5, 3) & (6, 3), (5, 4) & (1, 3), (6, 1), (6, 2), (6, 3), (5, 4) & (5, 3) \\ \hline
-12 & (5, 4) & (4, 4), (6, 4), (5, 5) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (5, 5) & (5, 4) \\ \hline
-13 & (5, 5) & (4, 5), (6, 5), (5, 6) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (5, 6) & (5, 5) \\ \hline
-14 & (5, 6) & (4, 6), (6, 6), (5, 7) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (5, 7) & (5, 6) \\ \hline
-15 & (5, 7) & (4, 7), (6, 7) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (4, 7), (6, 7) & (5, 7) \\ \hline
+8 & \textbf{(4, 1)} & \textbf{(5, 1)} & (1, 3), (5, 1) & (4, 1) \\ \hline
+9 & \textbf{(5, 1)} & (6, 1), \textbf{(5, 2)} & (1, 3), (6, 1), (5, 2) & (5, 1) \\ \hline
+10 & \textbf{(5, 2)} & (6, 2), \textbf{(5, 3)} & (1, 3), (6, 1), (6, 2), (5, 3) & (5, 2) \\ \hline
+11 & \textbf{(5, 3)} & (6, 3), \textbf{(5, 4)} & (1, 3), (6, 1), (6, 2), (6, 3), (5, 4) & (5, 3) \\ \hline
+12 & \textbf{(5, 4)} & (4, 4), (6, 4), \textbf{(5, 5)} & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (5, 5) & (5, 4) \\ \hline
+13 & \textbf{(5, 5)} & (4, 5), (6, 5), \textbf{(5, 6)} & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (5, 6) & (5, 5) \\ \hline
+14 & \textbf{(5, 6)} & (4, 6), (6, 6), \textbf{(5, 7)} & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (5, 7) & (5, 6) \\ \hline
+15 & \textbf{(5, 7)} & \textbf{(4, 7)}, (6, 7) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (4, 7), (6, 7) & (5, 7) \\ \hline
 16 & (6, 7) & None & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (4, 7) & (6, 7) \\ \hline
-17 & (4, 7) & (3, 7) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (3, 7) & (4, 7) \\ \hline
-18 & (3, 7) & (2, 7), (3, 6) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (2, 7), (3, 6) & (3, 7) \\ \hline
-19 & (3, 6)  & Meta  & Busqueda termina & (3, 6) \\ \hline
+17 & \textbf{(4, 7)} & \textbf{(3, 7)} & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (3, 7) & (4, 7) \\ \hline
+18 & \textbf{(3, 7)} & (2, 7), \textbf{(3, 6)} & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (2, 7), (3, 6) & (3, 7) \\ \hline
+19 & \textbf{(3, 6)}  & Meta  & Busqueda termina & (3, 6) \\ \hline
 }
-Los resultados del algoritmo de amplitud se pueden analizar de la siguiente manera:
-\begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 16 pasos con un coste total de 15.0, lo que no confirma que es la ruta óptima. Dado que este método se expande desde el nodo base hasta lo mas profundo de una ruta, este no garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores podria ser mas corta que la primera ruta profunda encontrada.
-    
-    \item \textbf{Eficiencia:} La búsqueda en profundidad sacrifica optimalidad para avanzar de manera directa en profundidad buscando una solucion, lo que en este caso en particular requirio menos nodos expandidos. Al explorar de forma exhaustiva y profunda ruta por ruta, el coste computacional es menor, requiriendo expandir 19 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 12 nodos para poder mantener los nodos a visitar.
-    
-    \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
-\end{itemize}
-\noindent  
-\begin{table}[htpb]
-\centering
-\caption{Resumen de resultados - Algoritmo de Búsqueda en Profundidad}
-\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Solución} & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (5,5) $\rightarrow$ (5,6) $\rightarrow$ (5,7) $\rightarrow$ (4,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
-\textbf{Longitud} & 16 \\ \hline
-\textbf{Coste solución} & 15.0 \\ \hline
-\textbf{Nodos expandidos} & 19 \\ \hline
-\textbf{Tamaño máximo de lista abierta} & 12 \\ \hline
-\end{tabularx}
-\end{table}
-\subsection{Evaluación de ambos algoritmos}
-Al evaluar el coste de ejecución, el algoritmo de profundidad demostró ser más eficiente en tiempo, ya que requirió expandir menos nodos (19 iteraciones frente a las 26 del algoritmo de amplitud). Sin embargo, en cuanto a la eficiencia de memoria, el algoritmo de amplitud fue superior, pues el tamaño máximo de su lista abierta fue de solo 7 nodos, contrastando con los 12 nodos que necesitó almacenar el algoritmo de profundidad.
-
-Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más eficiente en este caso particular sin antes establecer qué recurso es prioritario optimizar. En resumen:
-
-El algoritmo de profundidad fue más eficiente en tiempo (expandió menos nodos).
-
-El algoritmo de amplitud fue más eficiente en memoria (su lista abierta fue más pequeña).
-
-Será el análisis del caso a caso el que dictaminará si el proceso requiere priorizar un menor consumo de memoria o un menor tiempo de procesamiento. En base a esa información y a los requerimientos del sistema, se podrá escoger el algoritmo que mejor cumpla con lo pedido.
-% =========================================================================
-\section{Caso 2}
-% =========================================================================
-
-% =========================================================================
-\section{Caso 3}
-% =========================================================================
-
-\tablaiteraciones{Traza de iteraciones -- Caso 3}{tab:iter_caso3}{\filasvacias}
-
-% =========================================================================
-\section{Declaración de uso de IA}
-% =========================================================================
-
-
-% =========================================================================
-% ANEXOS (no cuentan en la extensión máxima)
-% =========================================================================
-\clearpage
-\appendix
-\section*{Anexos}
-\addcontentsline{toc}{section}{Anexos}
-
 
 \end{document}
