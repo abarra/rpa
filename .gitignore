@@ -1,0 +1,26 @@
+# --- LaTeX: ficheros auxiliares y de compilación ---
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.dvi
+*.idx
+*.ilg
+*.ind
+
+# --- LibreOffice: ficheros de bloqueo ---
+.~lock.*#

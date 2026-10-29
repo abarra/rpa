@@ -1,0 +1,242 @@
+% Memoria - Actividad 1: Búsqueda de rutas en empresa de paquetería
+% Compila con pdfLaTeX, LuaLaTeX o XeLaTeX.
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{iftex}
+
+% --- Idioma ---------------------------------------------------------------
+\usepackage[spanish,provide=*]{babel}
+
+% --- Tipografía: Calibri o similar ----------------------------------------
+\ifPDFTeX
+  % pdfLaTeX: Carlito (métricamente compatible con Calibri) si está
+  % instalado; si no, TeX Gyre Heros (sans serif tipo Helvetica).
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \IfFileExists{carlito.sty}{%
+    \usepackage[sfdefault,lf]{carlito}%
+  }{%
+    \usepackage{tgheros}%
+    \renewcommand{\familydefault}{\sfdefault}%
+  }
+\else
+  % LuaLaTeX / XeLaTeX: Calibri > Carlito > TeX Gyre Heros.
+  % Instalar Carlito: sudo apt install fonts-crosextra-carlito
+  \usepackage{fontspec}
+  \IfFontExistsTF{Calibri}{%
+    \setmainfont{Calibri}%
+  }{%
+    \IfFontExistsTF{Carlito}{%
+      \setmainfont{Carlito}%
+    }{%
+      \setmainfont{TeX Gyre Heros}%
+    }%
+  }
+\fi
+
+% --- Formato de página -----------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing % interlineado 1.5
+
+% --- Paquetes útiles -------------------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{figuras/}}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xltabular}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[hidelinks]{hyperref}
+
+\captionsetup{font=small}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single}
+
+% --- Tabla de traza de iteraciones (5 columnas x 10 filas) -----------------
+% Uso: \tablaiteraciones{Título}{etiqueta}{filas}
+% Cada fila: Iter & Nodo & Expande & Abierta & Cerrada \\ \hline
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\cabeceraiteraciones}{%
+  \hline
+  \textbf{Iteración} & \textbf{Nodo escogido} & \textbf{Se expande} &
+  \textbf{Lista Abierta} & \textbf{Lista Cerrada} \\ \hline
+}
+% xltabular permite que la tabla continúe en la página siguiente,
+% repitiendo la cabecera.
+\newcommand{\tablaiteraciones}[3]{%
+  \begingroup
+  \small
+  \renewcommand{\arraystretch}{1.2}
+  \begin{xltabular}{\textwidth}{|C{1.7cm}|C{2.2cm}|C{2.5cm}|X|C{2.2cm}|}
+    \caption{#1}\label{#2} \\
+    \cabeceraiteraciones
+    \endfirsthead
+    \caption[]{#1 (continuación)} \\
+    \cabeceraiteraciones
+    \endhead
+    \multicolumn{5}{r}{\footnotesize\itshape Continúa en la página siguiente} \\
+    \endfoot
+    \endlastfoot
+    #3
+  \end{xltabular}
+  \endgroup
+}
+\newcommand{\filasvacias}{%
+  1  & & & & \\ \hline
+  2  & & & & \\ \hline
+  3  & & & & \\ \hline
+  4  & & & & \\ \hline
+  5  & & & & \\ \hline
+  6  & & & & \\ \hline
+  7  & & & & \\ \hline
+  8  & & & & \\ \hline
+  9  & & & & \\ \hline
+  10 & & & & \\ \hline
+}
+
+% --- Datos de portada ------------------------------------------------------
+\newcommand{\autor}{Alexis Barra}
+\newcommand{\asignatura}{Razonamiento y Planificación Automática}
+\newcommand{\titulo}{Actividad 1: Búsqueda de rutas en empresa de paquetería}
+
+\begin{document}
+
+% =========================================================================
+% PORTADA
+% =========================================================================
+\begin{titlepage}
+  \centering
+  \vspace*{3cm}
+  {\Large Máster Universitario en Inteligencia Artificial\par}
+  \vspace{0.5cm}
+  {\large \asignatura\par}
+  \vspace{3cm}
+  {\LARGE\bfseries \titulo\par}
+  \vfill
+  {\large \autor\par}
+  \vspace{0.5cm}
+  {\large \today\par}
+\end{titlepage}
+
+% La numeración comienza tras la portada (la portada no cuenta en la extensión)
+\setcounter{page}{1}
+
+% =========================================================================
+\section{Caso 1}
+\subsection{Trazabilidad de algoritmos}
+% =========================================================================
+A continuacion se presenta la trazabilidad de ejecucion para el algoritmo de busqueda de amplitud.
+
+\tablaiteraciones{Traza de iteraciones Caso 1 - Algoritmo de Busqueda en Amplitud}{tab:iter_caso1_bf}{
+0  &  &  & (1, 2) &  \\ \hline
+1  & \textbf{(1, 2)} & \textbf{(1, 3)}, (1, 1) & (1, 3), (1, 1) & (1, 2) \\ \hline
+2  & \textbf{(1, 3)} & (2, 3), \textbf{(1, 4)} & (1, 1), (2, 3), (1, 4) & (1, 3) \\ \hline
+3  & (1, 1) & (2, 1) & (2, 3), (1, 4), (2, 1) & (1, 1) \\ \hline
+4  & (2, 3) & (3, 3) & (1, 4), (2, 1), (3, 3) & (2, 3) \\ \hline
+5  & \textbf{(1, 4)} & \textbf{(1, 5)} & (2, 1), (3, 3), (1, 5) & (1, 4) \\ \hline
+6  & (2, 1) & (3, 1) & (3, 3), (1, 5), (3, 1) & (2, 1) \\ \hline
+7  & (3, 3) & (3, 2) & (1, 5), (3, 1), (3, 2) & (3, 3) \\ \hline
+8  & \textbf{(1, 5)} & \textbf{(1, 6)} & (3, 1), (3, 2), (1, 6) & (1, 5) \\ \hline
+9  & (3, 1) & (4, 1) & (3, 2), (1, 6), (4, 1) & (3, 1) \\ \hline
+10 & (3, 2) & None & (1, 6), (4, 1) & (3, 2) \\ \hline
+11 & \textbf{(1, 6)} & \textbf{(1, 7)} & (4, 1), (1, 7) & (1, 6) \\ \hline
+12 & (4, 1) & (5, 1) & (1, 7), (5, 1) & (4, 1) \\ \hline
+13 & \textbf{(1, 7)} & \textbf{(2, 7)} & (5, 1), (2, 7) & (1, 7) \\ \hline
+14 & (5, 1) & (6, 1), (5, 2) & (2, 7), (6, 1), (5, 2) & (5, 1) \\ \hline
+15 & \textbf{(2, 7)} & \textbf{(3, 7)} & (6, 1), (5, 2), (3, 7) & (2, 7) \\ \hline
+16 & (6, 1) & (6, 2) & (5, 2), (3, 7), (6, 2) & (6, 1) \\ \hline
+17 & (5, 2) & (5, 3) & (3, 7), (6, 2), (5, 3) & (5, 2) \\ \hline
+18 & \textbf{(3, 7)} & (4, 7), \textbf{(3, 6)} & (6, 2), (5, 3), (4, 7), (3, 6) & (3, 7) \\ \hline
+19 & (6, 2) & (6, 3) & (5, 3), (4, 7), (3, 6), (6, 3) & (6, 2) \\ \hline
+20 & (5, 3) & (5, 4) & (4, 7), (3, 6), (6, 3), (5, 4) & (5, 3) \\ \hline
+21 & (4, 7) & (5, 7), (4, 6) & (3, 6), (6, 3), (5, 4), (5, 7), (4, 6) & (4, 7) \\ \hline
+22 & \textbf{(3, 6)} & \textbf{(3, 5)} & (6, 3), (5, 4), (5, 7), (4, 6), (3, 5) & (3, 6) \\ \hline
+23 & (6, 3) & (6, 4) & (5, 4), (5, 7), (4, 6), (3, 5), (6, 4) & (6, 3) \\ \hline
+24 & (5, 4) & (4, 4), (5, 5) & (5, 7), (4, 6), (3, 5), (6, 4), (4, 4), (5, 5) & (5, 4) \\ \hline
+25 & (5, 7) & (5, 6) & (4, 6), (3, 5), (6, 4), (4, 4), (5, 5), (5, 6) & (5, 7) \\ \hline
+26 & (4, 6) & (4, 5) & (3, 5), (6, 4), (4, 4), (5, 5), (5, 6), (4, 5) & (4, 6) \\ \hline
+27 & \textbf{(3, 5)} & Meta  & Busqueda termina & (3, 5) \\ \hline
+}
+Los resultados del algoritmo de amplitud se pueden analizar de la siguiente manera:
+\begin{itemize}
+    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 10 pasos con un coste total de 9.0, confirmando que es la ruta óptima. Dado que este método se expande nivel por nivel, garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores tendría obligatoriamente un coste mayor al requerir más nodos para procesar.
+    
+    \item \textbf{Eficiencia:} Para asegurar esta solución óptima, la búsqueda en amplitud sacrifica recursos de tiempo y memoria. Al explorar de forma exhaustiva y amplia por nivel, el coste computacional fue elevado, requiriendo expandir 26 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 7 nodos para poder mantener los nodos a visitar.
+    
+    \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los estados ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
+\end{itemize}
+\noindent  
+\begin{table}[htpb]
+\centering
+\caption{Resumen de resultados - Algoritmo de Búsqueda en Amplitud}
+\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
+\hline
+\textbf{Algoritmo o caso} & Búsqueda en Amplitud \\ \hline
+\textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
+\textbf{Longitud} & 10 \\ \hline
+\textbf{Coste solución} & 9.0 \\ \hline
+\textbf{Nodos expandidos} & 26 \\ \hline
+\textbf{Tamaño máximo de lista abierta} & 7 \\ \hline
+\end{tabularx}
+\end{table}
+
+A continuacion se presenta la trazabilidad de ejecucion para el algoritmo de busqueda en profundidad.
+
+\tablaiteraciones{Traza de iteraciones Caso 1 - Algoritmo de Busqueda en Profundidad}{tab:iter_caso1_bf}{
+0  &  &  & (1, 2) &  \\ \hline
+1 & (1, 2) & (1, 3), (1, 1) & (1, 3), (1, 1) & (1, 2) \\ \hline
+2 & (1, 1) & (2, 1) & (1, 3), (2, 1) & (1, 1) \\ \hline
+3 & (2, 1) & (3, 1) & (1, 3), (3, 1) & (2, 1) \\ \hline
+4 & (3, 1) & (4, 1), (3, 2) & (1, 3), (4, 1), (3, 2) & (3, 1) \\ \hline
+5 & (3, 2) & (3, 3) & (1, 3), (4, 1), (3, 3) & (3, 2) \\ \hline
+6 & (3, 3) & (2, 3) & (1, 3), (4, 1), (2, 3) & (3, 3) \\ \hline
+7 & (2, 3) & None & (1, 3), (4, 1) & (2, 3) \\ \hline
+8 & (4, 1) & (5, 1) & (1, 3), (5, 1) & (4, 1) \\ \hline
+9 & (5, 1) & (6, 1), (5, 2) & (1, 3), (6, 1), (5, 2) & (5, 1) \\ \hline
+10 & (5, 2) & (6, 2), (5, 3) & (1, 3), (6, 1), (6, 2), (5, 3) & (5, 2) \\ \hline
+11 & (5, 3) & (6, 3), (5, 4) & (1, 3), (6, 1), (6, 2), (6, 3), (5, 4) & (5, 3) \\ \hline
+12 & (5, 4) & (4, 4), (6, 4), (5, 5) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (5, 5) & (5, 4) \\ \hline
+13 & (5, 5) & (4, 5), (6, 5), (5, 6) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (5, 6) & (5, 5) \\ \hline
+14 & (5, 6) & (4, 6), (6, 6), (5, 7) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (5, 7) & (5, 6) \\ \hline
+15 & (5, 7) & (4, 7), (6, 7) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (4, 7), (6, 7) & (5, 7) \\ \hline
+16 & (6, 7) & None & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (4, 7) & (6, 7) \\ \hline
+17 & (4, 7) & (3, 7) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (3, 7) & (4, 7) \\ \hline
+18 & (3, 7) & (2, 7), (3, 6) & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (2, 7), (3, 6) & (3, 7) \\ \hline
+19 & (3, 6)  & Meta  & Busqueda termina & (3, 6) \\ \hline
+}
+Los resultados del algoritmo de amplitud se pueden analizar de la siguiente manera:
+\begin{itemize}
+    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 10 pasos con un coste total de 9.0, confirmando que es la ruta óptima. Dado que este método se expande nivel por nivel, garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores tendría obligatoriamente un coste mayor al requerir más nodos para procesar.
+    
+    \item \textbf{Eficiencia:} Para asegurar esta solución óptima, la búsqueda en amplitud sacrifica recursos de tiempo y memoria. Al explorar de forma exhaustiva y amplia por nivel, el coste computacional fue elevado, requiriendo expandir 26 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 7 nodos para poder mantener los nodos a visitar.
+    
+    \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los estados ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
+\end{itemize}
+% =========================================================================
+\section{Caso 2}
+% =========================================================================
+
+% =========================================================================
+\section{Caso 3}
+% =========================================================================
+
+\tablaiteraciones{Traza de iteraciones -- Caso 3}{tab:iter_caso3}{\filasvacias}
+
+% =========================================================================
+\section{Declaración de uso de IA}
+% =========================================================================
+
+
+% =========================================================================
+% ANEXOS (no cuentan en la extensión máxima)
+% =========================================================================
+\clearpage
+\appendix
+\section*{Anexos}
+\addcontentsline{toc}{section}{Anexos}
+
+
+\end{document}
