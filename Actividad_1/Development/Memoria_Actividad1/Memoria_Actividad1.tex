@@ -174,7 +174,6 @@ Los resultados del algoritmo de amplitud se pueden analizar de la siguiente mane
 \caption{Resumen de resultados - Algoritmo de Búsqueda en Amplitud}
 \begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
 \hline
-\textbf{Algoritmo o caso} & Búsqueda en Amplitud \\ \hline
 \textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
 \textbf{Longitud} & 10 \\ \hline
 \textbf{Coste solución} & 9.0 \\ \hline
@@ -209,12 +208,35 @@ A continuacion se presenta la trazabilidad de ejecucion para el algoritmo de bus
 }
 Los resultados del algoritmo de amplitud se pueden analizar de la siguiente manera:
 \begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 10 pasos con un coste total de 9.0, confirmando que es la ruta óptima. Dado que este método se expande nivel por nivel, garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores tendría obligatoriamente un coste mayor al requerir más nodos para procesar.
+    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 16 pasos con un coste total de 15.0, lo que no confirma que es la ruta óptima. Dado que este método se expande desde el nodo base hasta lo mas profundo de una ruta, este no garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores podria ser mas corta que la primera ruta profunda encontrada.
     
-    \item \textbf{Eficiencia:} Para asegurar esta solución óptima, la búsqueda en amplitud sacrifica recursos de tiempo y memoria. Al explorar de forma exhaustiva y amplia por nivel, el coste computacional fue elevado, requiriendo expandir 26 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 7 nodos para poder mantener los nodos a visitar.
+    \item \textbf{Eficiencia:} La búsqueda en profundidad sacrifica optimalidad para avanzar de manera directa en profundidad buscando una solucion, lo que en este caso en particular requirio menos nodos expandidos. Al explorar de forma exhaustiva y profunda ruta por ruta, el coste computacional es menor, requiriendo expandir 19 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 12 nodos para poder mantener los nodos a visitar.
     
-    \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los estados ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
+    \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
 \end{itemize}
+\noindent  
+\begin{table}[htpb]
+\centering
+\caption{Resumen de resultados - Algoritmo de Búsqueda en Profundidad}
+\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
+\hline
+\textbf{Solución} & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (5,5) $\rightarrow$ (5,6) $\rightarrow$ (5,7) $\rightarrow$ (4,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
+\textbf{Longitud} & 16 \\ \hline
+\textbf{Coste solución} & 15.0 \\ \hline
+\textbf{Nodos expandidos} & 19 \\ \hline
+\textbf{Tamaño máximo de lista abierta} & 12 \\ \hline
+\end{tabularx}
+\end{table}
+\subsection{Evaluación de ambos algoritmos}
+Al evaluar el coste de ejecución, el algoritmo de profundidad demostró ser más eficiente en tiempo, ya que requirió expandir menos nodos (19 iteraciones frente a las 26 del algoritmo de amplitud). Sin embargo, en cuanto a la eficiencia de memoria, el algoritmo de amplitud fue superior, pues el tamaño máximo de su lista abierta fue de solo 7 nodos, contrastando con los 12 nodos que necesitó almacenar el algoritmo de profundidad.
+
+Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más eficiente en este caso particular sin antes establecer qué recurso es prioritario optimizar. En resumen:
+
+El algoritmo de profundidad fue más eficiente en tiempo (expandió menos nodos).
+
+El algoritmo de amplitud fue más eficiente en memoria (su lista abierta fue más pequeña).
+
+Será el análisis del caso a caso el que dictaminará si el proceso requiere priorizar un menor consumo de memoria o un menor tiempo de procesamiento. En base a esa información y a los requerimientos del sistema, se podrá escoger el algoritmo que mejor cumpla con lo pedido.
 % =========================================================================
 \section{Caso 2}
 % =========================================================================
