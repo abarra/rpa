@@ -229,7 +229,22 @@ Será el análisis del caso a caso el que dictaminará si el proceso requiere pr
   \item ¿Se puede afirmar que las respuestas 2 y 3 siempre serán de este modo, aunque se varíen los costes?Sí, UCS seguirá encontrando el camino de coste mínimo ante cualquier variación positiva de los costes. Para A*, el comportamiento óptimo se conservará siempre y cuando la heurística siga siendo admisible bajo la nueva configuración de costes; si deja de serlo, la optimalidad del algoritmo ya no estará garantizada.
 \end{enumerate}
 \subsection{Análisis que sustentan las respuestas}
-
+El Caso 2 ejecuta los algoritmos de Búsqueda en Amplitud, Búsqueda de Coste Uniforme y Búsqueda A*. Los tres algoritmos se analizarán en este caso para responder las preguntas requeridas. Primero se presentan los resultados de ejecución para el algoritmo de Búsqueda en Amplitud.
+Como se destacó en el Caso 1, el algoritmo de Búsqueda en Amplitud es una estrategia no informada, lo que hace que los costos de transición no se evalúen para tomar decisiones. Por lo tanto, en el Caso 2, donde los costes no son uniformes, la ejecución del algoritmo no se altera y el resultado es el mismo. Por lo tanto, es válido reutilizar la \hyperref[anx:amplitud_caso1_2]{tabla de trazabilidad}, y el análisis del caso anterior. La única diferencia es que el coste de solución, en vez de ser 9.0, ahora es 15.0 dado que el coste ya no es uniforme, como lo expresa la siguiente tabla de resultados para el algoritmo.\\
+\noindent  
+\begin{table}[htpb]
+\centering
+\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
+\hline
+\textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
+\textbf{Longitud} & 10 \\ \hline
+\textbf{Coste solución} & 15.0 \\ \hline
+\textbf{Nodos expandidos} & 26 \\ \hline
+\textbf{Tamaño máximo de lista abierta} & 7 \\ \hline
+\end{tabularx}
+\caption{Resumen de resultados Caso 2 - Algoritmo de Búsqueda en Amplitud}
+\end{table}
+here comes the text for the algorithm of uniform cost 
 \noindent  
 \begin{table}[htpb]
 \centering
@@ -247,34 +262,17 @@ Será el análisis del caso a caso el que dictaminará si el proceso requiere pr
 \noindent  
 \begin{table}[htpb]
 \centering
-\caption{Resumen de resultados - Algoritmo de Búsqueda A*}
 \begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
 \hline
-\textbf{Algoritmo o caso} & Búsqueda A* \\ \hline
 \textbf{Solución} & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (4,4) $\rightarrow$ (4,5) $\rightarrow$ (3,5) \\ \hline
 \textbf{Longitud} & 12 \\ \hline
 \textbf{Coste solución} & 14.0 \\ \hline
 \textbf{Nodos expandidos} & 26 \\ \hline
 \textbf{Tamaño máximo de lista abierta} & 10 \\ \hline
 \end{tabularx}
+\caption{Resumen de resultados - Algoritmo de Búsqueda A*}
 \end{table}
 
-El caso 2 ejecuta los algoritmos de Búsqueda en amplitud, Búsqueda de Coste Uniforme y Búsqueda A*. Los tres algoritmos se analizarán en este caso para responder las preguntas requeridas. Primero se presenta los  resultados de ejecución para el algoritmo de Búsqueda en Amplitud.
-Como se destacó en el Caso 1, el Algoritmo de Búsqueda en Amplitud es un algoritmo de búsqueda no informado lo que hace que el costo de transición no se evalúan para tomar decisiones, entonces en el Caso 2 donde los costos no son uniformes la ejecución del algoritmo no se altera y el resultado es el mismo. Por lo tanto es válido reutilizar la tabla de trazabilidad \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}} y su interpretación en optimilidad, eficiancia y completitud.
-La única diferencia es que el coste de solución en vez de ser 9.0 ahora es 15.0 como lo expresa la siguiente tabla de resultados para el algoritmo.
-\noindent  
-\begin{table}[htpb]
-\centering
-\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
-\textbf{Longitud} & 10 \\ \hline
-\textbf{Coste solución} & 15.0 \\ \hline
-\textbf{Nodos expandidos} & 26 \\ \hline
-\textbf{Tamaño máximo de lista abierta} & 7 \\ \hline
-\end{tabularx}
-\caption{Resumen de resultados Caso 2 - Algoritmo de Búsqueda en Amplitud}
-\end{table}
 % =========================================================================
 
 % =========================================================================
@@ -412,6 +410,94 @@ La única diferencia es que el coste de solución en vez de ser 9.0 ahora es 15.
 32 & (5, 6) & None & [(5, 6) (13.0)], [(6, 5) (13.0)], [(3, 5) (14.0)], [(6, 6) (14.0)] & \dots, (5, 5), (6, 4), (4, 5) \\ \hline
 33 & (6, 5) & None & [(6, 5) (13.0)], [(3, 5) (14.0)], [(6, 6) (14.0)] & \dots, (6, 4), (4, 5), (5, 6) \\ \hline
 34 & \textbf{(3, 5)} & None (Meta) & [(3, 5) (14.0)], [(6, 6) (14.0)] & \dots, (4, 5), (5, 6), (6, 5) \\ \hline
+}
+\section{Traza Búsqueda A* con Heurística 1 Euclidiana}
+\label{anx:a_star_ecli}
+\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 1 Euclidiana}{tab:iter_h_1_caso3}{
+0 & - & - & [(1, 2) (5.0)] & - \\ \hline
+1 & (1, 2) [f=5.0] & (1, 3), (1, 1) & [(1, 3) (5.0)], [(1, 1) (10.0)] & (1, 2) \\ \hline
+2 & (1, 3) [f=5.0] & (2, 3), (1, 4) & [(2, 3) (5.0)], [(1, 4) (5.0)], [(1, 1) (10.0)] & (1, 2), (1, 3) \\ \hline
+3 & (2, 3) [f=5.0] & (3, 3) & [(1, 4) (5.0)], [(3, 3) (5.0)], [(1, 1) (10.0)] & (1, 2), (1, 3), (2, 3) \\ \hline
+4 & (1, 4) [f=5.0] & (1, 5) & [(3, 3) (5.0)], [(1, 5) (5.0)], [(1, 1) (10.0)] & (1, 2), (1, 3), (2, 3), (1, 4) \\ \hline
+5 & (3, 3) [f=5.0] & (3, 2) & [(1, 5) (5.0)], [(1, 1) (10.0)], [(3, 2) (10.0)] & \dots, (2, 3), (1, 4), (3, 3) \\ \hline
+6 & (1, 5) [f=5.0] & (1, 6) & [(1, 6) (7.0)], [(1, 1) (10.0)], [(3, 2) (10.0)] & \dots, (1, 4), (3, 3), (1, 5) \\ \hline
+7 & (1, 6) [f=7.0] & (1, 7) & [(1, 7) (9.0)], [(1, 1) (10.0)], [(3, 2) (10.0)] & \dots, (3, 3), (1, 5), (1, 6) \\ \hline
+8 & (1, 7) [f=9.0] & (2, 7) & [(2, 7) (9.0)], [(1, 1) (10.0)], [(3, 2) (10.0)] & \dots, (1, 5), (1, 6), (1, 7) \\ \hline
+9 & (2, 7) [f=9.0] & (3, 7) & [(3, 7) (9.0)], [(1, 1) (10.0)], [(3, 2) (10.0)] & \dots, (1, 6), (1, 7), (2, 7) \\ \hline
+10 & (3, 7) [f=9.0] & (4, 7), (3, 6) & [(1, 1) (10.0)], [(3, 2) (10.0)], [(4, 7) (11.0)], [(3, 6) (12.0)] & \dots, (1, 7), (2, 7), (3, 7) \\ \hline
+11 & (1, 1) [f=10.0] & (2, 1) & [(3, 2) (10.0)], [(2, 1) (10.0)], [(4, 7) (11.0)], [(3, 6) (12.0)] & \dots, (2, 7), (3, 7), (1, 1) \\ \hline
+12 & (3, 2) [f=10.0] & (3, 1) & [(2, 1) (10.0)], [(4, 7) (11.0)], [(3, 6) (12.0)], [(3, 1) (15.0)] & \dots, (3, 7), (1, 1), (3, 2) \\ \hline
+13 & (2, 1) [f=10.0] & (3, 1) & [(3, 1) (10.0)], [(4, 7) (11.0)], [(3, 6) (12.0)] & \dots, (1, 1), (3, 2), (2, 1) \\ \hline
+14 & (3, 1) [f=10.0] & (4, 1) & [(4, 7) (11.0)], [(3, 6) (12.0)], [(4, 1) (12.0)] & \dots, (3, 2), (2, 1), (3, 1) \\ \hline
+15 & (4, 7) [f=11.0] & (5, 7), (4, 6) & [(3, 6) (12.0)], [(4, 1) (12.0)], [(5, 7) (13.0)], [(4, 6) (14.0)] & \dots, (2, 1), (3, 1), (4, 7) \\ \hline
+16 & (3, 6) [f=12.0] & (3, 5) & [(4, 1) (12.0)], [(5, 7) (13.0)], [(4, 6) (14.0)], [(3, 5) (15.0)] & \dots, (3, 1), (4, 7), (3, 6) \\ \hline
+17 & (4, 1) [f=12.0] & (5, 1) & [(5, 7) (13.0)], [(4, 6) (14.0)], [(5, 1) (14.0)], [(3, 5) (15.0)] & \dots, (4, 7), (3, 6), (4, 1) \\ \hline
+18 & (5, 7) [f=13.0] & (6, 7), (5, 6) & [(4, 6) (14.0)], [(5, 1) (14.0)], [(3, 5) (15.0)], [(6, 7) (15.0)], [(5, 6) (16.0)] & \dots, (3, 6), (4, 1), (5, 7) \\ \hline
+19 & (4, 6) [f=14.0] & (4, 5) & [(5, 1) (14.0)], [(3, 5) (15.0)], [(6, 7) (15.0)], [(5, 6) (16.0)], [(4, 5) (17.0)] & \dots, (4, 1), (5, 7), (4, 6) \\ \hline
+20 & (5, 1) [f=14.0] & (6, 1), (5, 2) & [(5, 2) (14.0)], [(3, 5) (15.0)], [(6, 7) (15.0)], [(5, 6) (16.0)], [(6, 1) (16.0)], [(4, 5) (17.0)] & \dots, (5, 7), (4, 6), (5, 1) \\ \hline
+21 & (5, 2) [f=14.0] & (6, 2), (5, 3) & [(5, 3) (14.0)], [(3, 5) (15.0)], [(6, 7) (15.0)], [(5, 6) (16.0)], [(6, 1) (16.0)], [(6, 2) (16.0)], [(4, 5) (17.0)] & \dots, (4, 6), (5, 1), (5, 2) \\ \hline
+22 & (5, 3) [f=14.0] & (6, 3), (5, 4) & [(5, 4) (14.0)], [(3, 5) (15.0)], [(6, 7) (15.0)], [(5, 6) (16.0)], [(6, 1) (16.0)], [(6, 2) (16.0)], [(6, 3) (16.0)], [(4, 5) (17.0)] & \dots, (5, 1), (5, 2), (5, 3) \\ \hline
+23 & (5, 4) [f=14.0] & (4, 4), (6, 4), (5, 5) & [(4, 4) (14.0)], [(5, 5) (14.0)], [(3, 5) (15.0)], [(6, 7) (15.0)], [(5, 6) (16.0)], [(6, 1) (16.0)], [(6, 2) (16.0)], [(6, 3) (16.0)], [(6, 4) (16.0)], [(4, 5) (17.0)] & \dots, (5, 2), (5, 3), (5, 4) \\ \hline
+24 & (4, 4) [f=14.0] & (4, 5) & [(5, 5) (14.0)], [(4, 5) (14.0)], [(3, 5) (15.0)], [(6, 7) (15.0)], [(5, 6) (16.0)], [(6, 1) (16.0)], [(6, 2) (16.0)], [(6, 3) (16.0)], [(6, 4) (16.0)] & \dots, (5, 3), (5, 4), (4, 4) \\ \hline
+25 & (5, 5) [f=14.0] & (6, 5) & [(4, 5) (14.0)], [(3, 5) (15.0)], [(6, 7) (15.0)], [(5, 6) (16.0)], [(6, 1) (16.0)], [(6, 2) (16.0)], [(6, 3) (16.0)], [(6, 4) (16.0)], [(6, 5) (16.0)] & \dots, (5, 4), (4, 4), (5, 5) \\ \hline
+26 & (4, 5) [f=14.0] & (3, 5) & [(3, 5) (14.0)], [(6, 7) (15.0)], [(5, 6) (16.0)], [(6, 1) (16.0)], [(6, 2) (16.0)], [(6, 3) (16.0)], [(6, 4) (16.0)], [(6, 5) (16.0)] & \dots, (4, 4), (5, 5), (4, 5) \\ \hline
+27 & (3, 5) [f=14.0] & None (Meta) & [(3, 5) (14.0)], [(6, 7) (15.0)], [(5, 6) (16.0)], [(6, 1) (16.0)], [(6, 2) (16.0)], [(6, 3) (16.0)], [(6, 4) (16.0)], [(6, 5) (16.0)] & \dots, (4, 4), (5, 5), (4, 5) \\ \hline
+}
+
+\section{Traza Búsqueda A* con Heurística 2 Manhattan}
+\label{anx:coste_uniforme_caso2}
+\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 2 Manhattan}{tab:iter_h_2_caso3}{
+0 & - & - & [(1, 2) (3.0)] & - \\ \hline
+1 & (1, 2) [f=3.0] & (1, 3), (1, 1) & [(1, 3) (3.0)], [(1, 1) (8.0)] & (1, 2) \\ \hline
+2 & (1, 3) [f=3.0] & (2, 3), (1, 4) & [(2, 3) (4.0)], [(1, 4) (4.0)], [(1, 1) (8.0)] & (1, 2), (1, 3) \\ \hline
+3 & (2, 3) [f=4.0] & (3, 3) & [(1, 4) (4.0)], [(3, 3) (5.0)], [(1, 1) (8.0)] & (1, 2), (1, 3), (2, 3) \\ \hline
+4 & (1, 4) [f=4.0] & (1, 5) & [(3, 3) (5.0)], [(1, 5) (5.0)], [(1, 1) (8.0)] & (1, 2), (1, 3), (2, 3), (1, 4) \\ \hline
+5 & (3, 3) [f=5.0] & (3, 2) & [(1, 5) (5.0)], [(1, 1) (8.0)], [(3, 2) (10.0)] & \dots, (2, 3), (1, 4), (3, 3) \\ \hline
+6 & (1, 5) [f=5.0] & (1, 6) & [(1, 6) (6.0)], [(1, 1) (8.0)], [(3, 2) (10.0)] & \dots, (1, 4), (3, 3), (1, 5) \\ \hline
+7 & (1, 6) [f=6.0] & (1, 7) & [(1, 7) (7.0)], [(1, 1) (8.0)], [(3, 2) (10.0)] & \dots, (3, 3), (1, 5), (1, 6) \\ \hline
+8 & (1, 7) [f=7.0] & (2, 7) & [(1, 1) (8.0)], [(2, 7) (8.0)], [(3, 2) (10.0)] & \dots, (1, 5), (1, 6), (1, 7) \\ \hline
+9 & (1, 1) [f=8.0] & (2, 1) & [(2, 7) (8.0)], [(2, 1) (9.0)], [(3, 2) (10.0)] & \dots, (1, 6), (1, 7), (1, 1) \\ \hline
+10 & (2, 7) [f=8.0] & (3, 7) & [(2, 1) (9.0)], [(3, 7) (9.0)], [(3, 2) (10.0)] & \dots, (1, 7), (1, 1), (2, 7) \\ \hline
+11 & (2, 1) [f=9.0] & (3, 1) & [(3, 7) (9.0)], [(3, 2) (10.0)], [(3, 1) (10.0)] & \dots, (1, 1), (2, 7), (2, 1) \\ \hline
+12 & (3, 7) [f=9.0] & (4, 7), (3, 6) & [(3, 2) (10.0)], [(3, 1) (10.0)], [(4, 7) (10.0)], [(3, 6) (12.0)] & \dots, (2, 7), (2, 1), (3, 7) \\ \hline
+13 & (3, 2) [f=10.0] & None & [(3, 1) (10.0)], [(4, 7) (10.0)], [(3, 6) (12.0)] & \dots, (2, 1), (3, 7), (3, 2) \\ \hline
+14 & (3, 1) [f=10.0] & (4, 1) & [(4, 7) (10.0)], [(4, 1) (11.0)], [(3, 6) (12.0)] & \dots, (3, 7), (3, 2), (3, 1) \\ \hline
+15 & (4, 7) [f=10.0] & (5, 7), (4, 6) & [(4, 1) (11.0)], [(5, 7) (11.0)], [(3, 6) (12.0)], [(4, 6) (13.0)] & \dots, (3, 2), (3, 1), (4, 7) \\ \hline
+16 & (4, 1) [f=11.0] & (5, 1) & [(5, 7) (11.0)], [(3, 6) (12.0)], [(5, 1) (12.0)], [(4, 6) (13.0)] & \dots, (3, 1), (4, 7), (4, 1) \\ \hline
+17 & (5, 7) [f=11.0] & (6, 7), (5, 6) & [(3, 6) (12.0)], [(5, 1) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(5, 6) (15.0)] & \dots, (4, 7), (4, 1), (5, 7) \\ \hline
+18 & (3, 6) [f=12.0] & (3, 5) & [(5, 1) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(5, 6) (15.0)], [(3, 5) (15.0)] & \dots, (4, 1), (5, 7), (3, 6) \\ \hline
+19 & (5, 1) [f=12.0] & (6, 1), (5, 2) & [(5, 2) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(6, 1) (13.0)], [(5, 6) (15.0)], [(3, 5) (15.0)] & \dots, (5, 7), (3, 6), (5, 1) \\ \hline
+20 & (5, 2) [f=12.0] & (6, 2), (5, 3) & [(5, 3) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(6, 1) (13.0)], [(6, 2) (13.0)], [(5, 6) (15.0)], [(3, 5) (15.0)] & \dots, (3, 6), (5, 1), (5, 2) \\ \hline
+21 & (5, 3) [f=12.0] & (6, 3), (5, 4) & [(4, 6) (13.0)], [(6, 7) (13.0)], [(6, 1) (13.0)], [(6, 2) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)] & \dots, (5, 1), (5, 2), (5, 3) \\ \hline
+22 & (4, 6) [f=13.0] & (4, 5) & [(6, 7) (13.0)], [(6, 1) (13.0)], [(6, 2) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)] & \dots, (5, 2), (5, 3), (4, 6) \\ \hline
+23 & (6, 7) [f=13.0] & (6, 6) & [(6, 1) (13.0)], [(6, 2) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (5, 3), (4, 6), (6, 7) \\ \hline
+24 & (6, 1) [f=13.0] & None & [(6, 2) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (4, 6), (6, 7), (6, 1) \\ \hline
+25 & (6, 2) [f=13.0] & None & [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (6, 7), (6, 1), (6, 2) \\ \hline
+26 & (5, 4) [f=13.0] & (4, 4), (6, 4), (5, 5) & [(4, 4) (13.0)], [(6, 3) (14.0)], [(5, 5) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (6, 1), (6, 2), (5, 4) \\ \hline
+27 & (4, 4) [f=13.0] & (4, 5) & [(6, 3) (14.0)], [(5, 5) (14.0)], [(4, 5) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(6, 6) (17.0)] & \dots, (6, 2), (5, 4), (4, 4) \\ \hline
+28 & (6, 3) [f=14.0] & None & [(5, 5) (14.0)], [(4, 5) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(6, 6) (17.0)] & \dots, (5, 4), (4, 4), (6, 3) \\ \hline
+29 & (5, 5) [f=14.0] & (6, 5) & [(4, 5) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (4, 4), (6, 3), (5, 5) \\ \hline
+30 & (4, 5) [f=14.0] & (3, 5) & [(3, 5) (14.0)], [(5, 6) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (6, 3), (5, 5), (4, 5) \\ \hline
+31 & (3, 5) [f=14.0] & None (Meta) & [(3, 5) (14.0)], [(5, 6) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (6, 3), (5, 5), (4, 5) \\ \hline
+}
+
+\section{Traza Búsqueda A* con Heuristica 3 2*Manhattan}
+\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 3 2*Manhattan}{tab:iter_h_1_caso3}{
+0 & - & - & [(1, 2) (10.0)] & - \\ \hline
+1 & (1, 2) [f=10.0] & (1, 3), (1, 1) & [(1, 3) (9.0)], [(1, 1) (16.0)] & (1, 2) \\ \hline
+2 & (1, 3) [f=9.0] & (2, 3), (1, 4) & [(2, 3) (8.0)], [(1, 4) (8.0)], [(1, 1) (16.0)] & (1, 2), (1, 3) \\ \hline
+3 & (2, 3) [f=8.0] & (3, 3) & [(3, 3) (7.0)], [(1, 4) (8.0)], [(1, 1) (16.0)] & (1, 2), (1, 3), (2, 3) \\ \hline
+4 & (3, 3) [f=7.0] & (3, 2) & [(1, 4) (8.0)], [(3, 2) (13.0)], [(1, 1) (16.0)] & (1, 2), (1, 3), (2, 3), (3, 3) \\ \hline
+5 & (1, 4) [f=8.0] & (1, 5) & [(1, 5) (7.0)], [(3, 2) (13.0)], [(1, 1) (16.0)] & \dots, (2, 3), (3, 3), (1, 4) \\ \hline
+6 & (1, 5) [f=7.0] & (1, 6) & [(1, 6) (10.0)], [(3, 2) (13.0)], [(1, 1) (16.0)] & \dots, (3, 3), (1, 4), (1, 5) \\ \hline
+7 & (1, 6) [f=10.0] & (1, 7) & [(3, 2) (13.0)], [(1, 7) (13.0)], [(1, 1) (16.0)] & \dots, (1, 4), (1, 5), (1, 6) \\ \hline
+8 & (3, 2) [f=13.0] & (3, 1) & [(1, 7) (13.0)], [(1, 1) (16.0)], [(3, 1) (19.0)] & \dots, (1, 5), (1, 6), (3, 2) \\ \hline
+9 & (1, 7) [f=13.0] & (2, 7) & [(2, 7) (12.0)], [(1, 1) (16.0)], [(3, 1) (19.0)] & \dots, (1, 6), (3, 2), (1, 7) \\ \hline
+10 & (2, 7) [f=12.0] & (3, 7) & [(3, 7) (11.0)], [(1, 1) (16.0)], [(3, 1) (19.0)] & \dots, (3, 2), (1, 7), (2, 7) \\ \hline
+11 & (3, 7) [f=11.0] & (4, 7), (3, 6) & [(3, 6) (13.0)], [(4, 7) (14.0)], [(1, 1) (16.0)], [(3, 1) (19.0)] & \dots, (1, 7), (2, 7), (3, 7) \\ \hline
+12 & (3, 6) [f=13.0] & (4, 6), (3, 5) & [(4, 7) (14.0)], [(3, 5) (15.0)], [(1, 1) (16.0)], [(4, 6) (16.0)], [(3, 1) (19.0)] & \dots, (2, 7), (3, 7), (3, 6) \\ \hline
+13 & (4, 7) [f=14.0] & (5, 7) & [(3, 5) (15.0)], [(1, 1) (16.0)], [(4, 6) (16.0)], [(5, 7) (17.0)], [(3, 1) (19.0)] & \dots, (3, 7), (3, 6), (4, 7) \\ \hline
+14 & (3, 5) [f=15.0] & None (Meta) & [(3, 5) (15.0)], [(1, 1) (16.0)], [(4, 6) (16.0)], [(5, 7) (17.0)], [(3, 1) (19.0)] & \dots, (3, 7), (3, 6), (4, 7) \\ \hline
 }
 
 \end{document}
