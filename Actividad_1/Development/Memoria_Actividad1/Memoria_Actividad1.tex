@@ -228,9 +228,10 @@ Será el análisis del caso a caso el que dictaminará si el proceso requiere pr
   
   \item ¿Se puede afirmar que las respuestas 2 y 3 siempre serán de este modo, aunque se varíen los costes?Sí, UCS seguirá encontrando el camino de coste mínimo ante cualquier variación positiva de los costes. Para A*, el comportamiento óptimo se conservará siempre y cuando la heurística siga siendo admisible bajo la nueva configuración de costes; si deja de serlo, la optimalidad del algoritmo ya no estará garantizada.
 \end{enumerate}
+
 \subsection{Análisis que sustentan las respuestas}
 El Caso 2 ejecuta los algoritmos de Búsqueda en Amplitud, Búsqueda de Coste Uniforme y Búsqueda A*. Los tres algoritmos se analizarán en este caso para responder las preguntas requeridas. Primero se presentan los resultados de ejecución para el algoritmo de Búsqueda en Amplitud.
-Como se destacó en el Caso 1, el algoritmo de Búsqueda en Amplitud es una estrategia no informada, lo que hace que los costos de transición no se evalúen para tomar decisiones. Por lo tanto, en el Caso 2, donde los costes no son uniformes, la ejecución del algoritmo no se altera y el resultado es el mismo. Por lo tanto, es válido reutilizar la \hyperref[anx:amplitud_caso1_2]{tabla de trazabilidad}, y el análisis del caso anterior. La única diferencia es que el coste de solución, en vez de ser 9.0, ahora es 15.0 dado que el coste ya no es uniforme, como lo expresa la siguiente tabla de resultados para el algoritmo.\\
+Como se destacó en el Caso 1, el algoritmo de Búsqueda en Amplitud es una estrategia no informada, lo que hace que los costos de transición no se evalúen para tomar decisiones. Por lo tanto, en el Caso 2, donde los costes no son uniformes, la ejecución del algoritmo no se altera y el resultado es el mismo. Entonces, es válido reutilizar la \hyperref[anx:amplitud_caso1_2]{tabla de trazabilidad}, y el análisis del caso anterior. La única diferencia es que el coste de solución, en vez de ser 9.0, ahora es 15.0 dado que el coste ya no es uniforme, como lo expresa la siguiente tabla de resultados para el algoritmo.
 \noindent  
 \begin{table}[htpb]
 \centering
@@ -243,8 +244,16 @@ Como se destacó en el Caso 1, el algoritmo de Búsqueda en Amplitud es una estr
 \textbf{Tamaño máximo de lista abierta} & 7 \\ \hline
 \end{tabularx}
 \caption{Resumen de resultados Caso 2 - Algoritmo de Búsqueda en Amplitud}
-\end{table}
-here comes the text for the algorithm of uniform cost 
+\end{table}\\
+
+\subsubsection{Búsqueda de Coste Uniforme}
+Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad que se puede consultar en la \hyperref[anx:coste_uniforme_caso2]{Traza Búsqueda de Coste Uniforme Caso 2 \ref{anx:coste_uniforme_caso2}}. 
+Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la siguiente manera:
+\begin{itemize}
+    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado hasta encontrar la meta, garantiza hallar el camino más económico; cualquier ruta alternativa descubierta a través de nodos con mayor coste acumulado no será óptima y quedará descartada.
+    \item \textbf{Eficiencia:} La Búsqueda de Coste Uniforme sacrifica eficiencia para avanzar por el camino de menor coste, lo que en este caso particular requirió una mayor expansión de nodos. Al explorar de forma exhaustiva, el coste computacional aumenta, requiriendo expandir 33 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 8 nodos para mantener el registro de las posiciones pendientes por visitar. 
+    \item \textbf{Completitud:} El algoritmo es completo, lo que garantiza encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de este mapa.
+\end{itemize}
 \noindent  
 \begin{table}[htpb]
 \centering
@@ -257,8 +266,8 @@ here comes the text for the algorithm of uniform cost
 \textbf{Tamaño máximo de lista abierta} & 8 \\ \hline
 \end{tabularx}
 \caption{Resumen de resultados - Algoritmo de Búsqueda de Coste Uniforme}
-\end{table}\\
----------------------------------------
+\end{table}
+\subsubsection{Búsqueda A*}
 \noindent  
 \begin{table}[htpb]
 \centering
@@ -293,7 +302,7 @@ here comes the text for the algorithm of uniform cost
     
     \item Si la respuesta a la pregunta 6 es no en algún caso, ¿puede probar esta afirmación diseñando un mapa (variable MAP) que compruebe este hecho? Añada este mapa y sus resultados a la tabla original.
     \end{enumerate}
-    \subsection{Análisis que sustentan las respuestas}
+\subsection{Análisis que sustentan las respuestas}
 
 % =========================================================================
 \section{Declaración de uso de IA}
