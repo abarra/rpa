@@ -268,6 +268,13 @@ Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la sigui
 \caption{Resumen de resultados - Algoritmo de Búsqueda de Coste Uniforme}
 \end{table}
 \subsubsection{Búsqueda A*}
+Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad que se puede consultar en la \hyperref[anx:a_star_ecli]{Traza Búsqueda A* con Heurística 1 Euclidiana \ref{anx:a_star_ecli}}. 
+Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la siguiente manera:
+\begin{itemize}
+    \item \textbf{Optimalidad:}TBD El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado hasta encontrar la meta, garantiza hallar el camino más económico; cualquier ruta alternativa descubierta a través de nodos con mayor coste acumulado no será óptima y quedará descartada.
+    \item \textbf{Eficiencia:}TBD La Búsqueda de Coste Uniforme sacrifica eficiencia para avanzar por el camino de menor coste, lo que en este caso particular requirió una mayor expansión de nodos. Al explorar de forma exhaustiva, el coste computacional aumenta, requiriendo expandir 33 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 8 nodos para mantener el registro de las posiciones pendientes por visitar. 
+    \item \textbf{Completitud:}TBD El algoritmo es completo, lo que garantiza encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de este mapa.
+\end{itemize}
 \noindent  
 \begin{table}[htpb]
 \centering
@@ -454,7 +461,7 @@ Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la sigui
 }
 
 \section{Traza Búsqueda A* con Heurística 2 Manhattan}
-\label{anx:coste_uniforme_caso2}
+\label{anx:a_star_man}
 \tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 2 Manhattan}{tab:iter_h_2_caso3}{
 0 & - & - & [(1, 2) (3.0)] & - \\ \hline
 1 & (1, 2) [f=3.0] & (1, 3), (1, 1) & [(1, 3) (3.0)], [(1, 1) (8.0)] & (1, 2) \\ \hline
@@ -491,6 +498,7 @@ Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la sigui
 }
 
 \section{Traza Búsqueda A* con Heuristica 3 2*Manhattan}
+\label{anx:a_star_2man}
 \tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 3 2*Manhattan}{tab:iter_h_1_caso3}{
 0 & - & - & [(1, 2) (10.0)] & - \\ \hline
 1 & (1, 2) [f=10.0] & (1, 3), (1, 1) & [(1, 3) (9.0)], [(1, 1) (16.0)] & (1, 2) \\ \hline
