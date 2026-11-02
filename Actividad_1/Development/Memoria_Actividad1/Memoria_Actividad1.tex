@@ -154,9 +154,9 @@
 \section{Caso 1}
 \subsection{Respuestas a preguntas planteadas}
 \begin{enumerate}
-  \item Muestre la tabla con los datos de ambas ejecuciones. Las tabla de trazabilidad que se puede consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}} y \hyperref[anx:profundidad_caso1]{Traza para Búsqueda en Profundidad Caso 1 Anexo \ref{anx:profundidad_caso1}}. 
-  \item ¿Obtiene amplitud un resultado óptimo? ¿Por qué? Sí, obtiene un resultado óptimo. En este caso particular, logró una solución de 10 pasos con un coste de 9.0. Como este algoritmo se expande de nivel por nivel, se garantiza que encuentra el camino más corto posible; cualquier ruta alternativa que el algoritmo descubriera en un nivel posterior requeriría, obligatoriamente, procesar más nodos y por ende tendría un coste mayor.
-  \item ¿Obtiene profundidad un resultado óptimo? ¿Por qué? No, no obtiene un resultado óptimo. El algoritmo entregó una solución más larga, de 16 pasos con un coste de 15.0. Esto ocurre porque la búsqueda en profundidad se expande desde el nodo base hasta lo más profundo de una ruta posible sin evaluar todo el nivel de manera uniforme. Por esto mismo, no garantiza el camino más corto, ya que pueden existir rutas alternativas descubiertas más tarde que sean considerablemente más cortas.
+  \item Muestre la tabla con los datos de ambas ejecuciones. Las tabla de trazabilidad se pueden consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}} y \hyperref[anx:profundidad_caso1]{Traza para Búsqueda en Profundidad Caso 1 Anexo \ref{anx:profundidad_caso1}}. 
+  \item ¿Obtiene amplitud un resultado óptimo? ¿Por qué? Sí, obtiene un resultado óptimo. En este caso particular, logró una solución de 10 pasos con un coste de 9.0. Como este algoritmo se expande de nivel por nivel, se garantiza que encuentra el camino más corto posible, cualquier ruta alternativa que el algoritmo descubriera en un nivel posterior requeriría, obligatoriamente, procesar más nodos y por ende tendría un coste mayor.
+  \item ¿Obtiene profundidad un resultado óptimo? ¿Por qué? No, no obtiene un resultado óptimo. El algoritmo entregó una solución más larga, de 16 pasos con un coste de 15.0. Esto ocurre porque la búsqueda en profundidad se expande desde el nodo base hasta lo más profundo de una ruta posible sin evaluar todo el nivel de manera uniforme. Por esto mismo, no garantiza el camino más corto, ya que pueden existir rutas alternativas descubiertas más tarde que sean más cortas.
   \item ¿Cuál de los dos algoritmos es más eficiente en este caso particular? No se puede definir de forma absoluta cuál de los dos es "el más eficiente", ya que esto depende del recurso, tiempo o memoria, que se priorice:   
   \begin{itemize}
   \item Eficiencia en Tiempo: La Búsqueda en Profundidad fue más eficiente, ya que requirió expandir menos nodos (solo 19 iteraciones) frente a las 26 del algoritmo en amplitud.   
@@ -166,7 +166,7 @@
 \subsection{Análisis que sustentan las respuestas}
 % =========================================================================
 \subsubsection{Búsqueda en Amplitud}
-Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad que se puede consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}}. 
+Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad se puede consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}}. 
 Los resultados del algoritmo Búsqueda en Amplitud se analizan de la siguiente manera:
 \begin{itemize}
     \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 10 pasos con un coste total de 9.0, confirmando que es la ruta óptima. Dado que este método se expande nivel por nivel, garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores tendría obligatoriamente un coste mayor al requerir más nodos para procesar.
@@ -186,7 +186,7 @@ Los resultados del algoritmo Búsqueda en Amplitud se analizan de la siguiente m
 \caption{Resumen de resultados Caso 1 - Algoritmo de Búsqueda en Amplitud}
 \end{table}
 \subsubsection{Búsqueda en Profundidad}
-Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad que se puede consultar en la \hyperref[anx:profundidad_caso1]{Traza para Búsqueda en Profundidad Caso 1 Anexo \ref{anx:profundidad_caso1}}. Los resultados del algoritmo en profundidad se analizan de la siguiente manera:
+Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad se puede consultar en la \hyperref[anx:profundidad_caso1]{Traza para Búsqueda en Profundidad Caso 1 Anexo \ref{anx:profundidad_caso1}}. Los resultados del algoritmo en profundidad se analizan de la siguiente manera:
 \begin{itemize}
     \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 16 pasos con un coste total de 15.0, lo que no confirma que es la ruta óptima. Dado que este método se expande desde el nodo base hasta lo más profundo de una ruta, este no garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores podría ser más corta que la primera ruta profunda encontrada.
     \item \textbf{Eficiencia:} La búsqueda en profundidad sacrifica optimalidad para avanzar de manera directa en profundidad buscando una solución, lo que en este caso en particular requirió menos nodos expandidos. Al explorar de forma exhaustiva y profunda ruta por ruta, el coste computacional es menor, requiriendo expandir 19 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 12 nodos para poder mantener los nodos a visitar.   
@@ -216,17 +216,19 @@ Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más efici
 \section{Caso 2}
 \subsection{Respuestas a preguntas planteadas}
 \begin{enumerate}
-  \item Muestre una tabla con los datos de todas las ejecuciones.
+  \item 
+  Muestre una tabla con los datos de todas las ejecuciones. 
+  Las tabla de trazabilidad se pueden consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}, \hyperref[anx:coste_uniforme_caso2]{Traza Búsqueda de Coste Uniforme Caso 2 Anexo} \ref{anx:coste_uniforme_caso2}}, 
+  y , \hyperref[anx:a_star_ecli]{Traza Búsqueda A* con Heurística 1 Euclidiana \ref{anx:a_star_ecli}}.
   \item ¿Obtiene UCS (Dijkstra) el camino de coste óptimo? Sí, encuentra el camino óptimo. Dado que la Búsqueda de Coste Uniforme (UCS) explora sistemáticamente los nodos en orden de menor a mayor según su coste acumulado, garantiza encontrar la solución con el menor coste total (14.0 en este escenario).  
   \item ¿Obtiene A* el camino de coste óptimo? Sí, encuentra el camino óptimo. Al emplear una función heurística admisible (como la distancia Manhattan en este caso), el algoritmo asegura que el coste estimado nunca sobrestime el coste real, encontrando de manera certera la solución óptima de coste 14.0.
-  \item ¿Cuál de los dos algoritmos (UCS o A*) es más eficiente en el caso planteado? La eficiencia depende del recurso que se priorice, ya que ambos presentan un equilibrio (trade-off):
+  \item ¿Cuál de los dos algoritmos (UCS o A*) es más eficiente en el caso planteado? La eficiencia depende del recurso que se priorice:
 	\begin{itemize}
 		\item En términos de tiempo de ejecución, A* es superior, ya que requiere expandir un menor número de nodos, 26 frente a los 33 de UCS.
 		\item En términos de uso de memoria, UCS resulta más eficiente, puesto que su lista abierta mantiene un tamaño máximo menor, 8 nodos frente a los 10 de A*.
 	\end{itemize}
   \item ¿Se puede afirmar que las respuestas 2 y 3 siempre serán de este modo, aunque se varíe el mapa? Para el caso de UCS, la respuesta se mantiene siempre afirmativa, ya que su optimalidad depende únicamente de los costes reales y no de heurísticas. Para A*, esto solo se cumple de manera garantizada si la heurística utilizada es admisible (es decir, si nunca sobreestima el coste real hacia la meta). De lo contrario, A* no asegura encontrar el camino de coste óptimo.
-  
-  \item ¿Se puede afirmar que las respuestas 2 y 3 siempre serán de este modo, aunque se varíen los costes?Sí, UCS seguirá encontrando el camino de coste mínimo ante cualquier variación positiva de los costes. Para A*, el comportamiento óptimo se conservará siempre y cuando la heurística siga siendo admisible bajo la nueva configuración de costes; si deja de serlo, la optimalidad del algoritmo ya no estará garantizada.
+  \item ¿Se puede afirmar que las respuestas 2 y 3 siempre serán de este modo, aunque se varíen los costes? Sí, UCS seguirá encontrando el camino de coste mínimo ante cualquier variación positiva de los costes. Para A*, el comportamiento óptimo se conservará siempre y cuando la heurística siga siendo admisible bajo la nueva configuración de costes, si deja de serlo, la optimalidad del algoritmo ya no estará garantizada.
 \end{enumerate}
 
 \subsection{Análisis que sustentan las respuestas}
@@ -249,7 +251,7 @@ Como se destacó en el Caso 1, el algoritmo de Búsqueda en Amplitud es una estr
 Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad que se puede consultar en la \hyperref[anx:coste_uniforme_caso2]{Traza Búsqueda de Coste Uniforme Caso 2 \ref{anx:coste_uniforme_caso2}}. 
 Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la siguiente manera:
 \begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado hasta encontrar la meta, garantiza hallar el camino más económico; cualquier ruta alternativa descubierta a través de nodos con mayor coste acumulado no será óptima y quedará descartada.
+    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado hasta encontrar la meta, garantiza hallar el camino más económico, cualquier ruta alternativa descubierta a través de nodos con mayor coste acumulado no será óptima y quedará descartada.
     \item \textbf{Eficiencia:} La Búsqueda de Coste Uniforme sacrifica eficiencia para avanzar por el camino de menor coste, lo que en este caso particular requirió una mayor expansión de nodos. Al explorar de forma exhaustiva, el coste computacional aumenta, requiriendo expandir 33 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 8 nodos para mantener el registro de las posiciones pendientes por visitar. 
     \item \textbf{Completitud:} El algoritmo es completo, lo que garantiza encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de este mapa.
 \end{itemize}
@@ -270,7 +272,7 @@ Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la sigui
 Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad que se puede consultar en la \hyperref[anx:a_star_ecli]{Traza Búsqueda A* con Heurística 1 Euclidiana \ref{anx:a_star_ecli}}. 
 Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la siguiente manera:
 \begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado más su heurística hasta encontrar la meta, garantiza hallar el camino más económico; cualquier ruta alternativa descubierta a través de nodos con mayor coste total estimado no será óptima y quedará descartada.
+    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado más su heurística hasta encontrar la meta, garantiza hallar el camino más económico, cualquier ruta alternativa descubierta a través de nodos con mayor coste total estimado no será óptima y quedará descartada.
     \item \textbf{Eficiencia:} La Búsqueda A*, gracias a su heurística, es eficiente para avanzar por el camino de menor coste, lo que en este caso particular requirió una menor expansión de nodos. Al explorar de forma dirigida utilizando costes acumulados y heurística, el coste computacional se mantiene bajo, requiriendo expandir solo 26 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 10 nodos para mantener el registro de las posiciones pendientes por visitar.
     \item \textbf{Completitud:} El algoritmo es completo, lo que garantiza encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de este mapa.
 \end{itemize}
@@ -309,7 +311,7 @@ Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más efici
     
     \item ¿Es el algoritmo A* igualmente eficiente en todos los casos planteados? No, no son igualmente eficientes. La heurística 3 resulta ser la más rápida en términos de nodos expandidos y memoria en la lista abierta, pero lo logra porque al ser inadmisible fuerza la exploración sacrificando la optimalidad. Entre las admisibles, la heurística 2 muestra un comportamiento más conservador y subestima más el coste que la heurística 1, lo que hace que A* tienda a comportarse de manera similar a UCS y requiera más iteraciones (31 frente a 27).
 
-    \item ¿Se puede afirmar que la respuesta 4 no variaría al cambiar las paredes del mapa y las posiciones de inicio y fin que aparecen en el mapa para ninguna de las heurísticas presentadas? No, sí podría variar. La eficiencia, el comportamiento de los algoritmos y la admisibilidad de una heurística dependen directamente de la topología del mapa, la disposición de los obstáculos y los costes de las aristas. Si se modifican el mapa o los puntos de origen y destino, las distancias reales cambian, por lo que una heurística que antes era admisible podría dejar de serlo o el rendimiento relativo entre las distintas heurísticas podría alterarse por completo.
+    \item ¿Se puede afirmar que la respuesta 4 no variaría al cambiar las paredes del mapa y las posiciones de inicio y fin que aparecen en el mapa para ninguna de las heurísticas presentadas? No, sí podría variar. La eficiencia, el comportamiento de los algoritmos y la admisibilidad de una heurística dependen directamente de la topología del mapa, la disposición de los obstáculos y los costes de las transiciones. Si se modifican el mapa o los puntos de origen y destino, las distancias reales cambian, por lo que una heurística que antes era admisible podría dejar de serlo o el rendimiento relativo entre las distintas heurísticas podría alterarse por completo.
     
     \item Si la respuesta a la pregunta 6 es no en algún caso, ¿puede probar esta afirmación diseñando un mapa (variable MAP) que compruebe este hecho? Añada este mapa y sus resultados a la tabla original.
     \end{enumerate}
