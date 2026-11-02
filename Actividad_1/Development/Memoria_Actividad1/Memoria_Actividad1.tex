@@ -270,7 +270,7 @@ Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la sigui
 \end{table}
 \subsubsection{Búsqueda A*}
 Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad que se puede consultar en la \hyperref[anx:a_star_ecli]{Traza Búsqueda A* con Heurística 1 Euclidiana \ref{anx:a_star_ecli}}. 
-Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la siguiente manera:
+Los resultados del algoritmo Búsqueda A* se analizan de la siguiente manera:
 \begin{itemize}
     \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado más su heurística hasta encontrar la meta, garantiza hallar el camino más económico, cualquier ruta alternativa descubierta a través de nodos con mayor coste total estimado no será óptima y quedará descartada.
     \item \textbf{Eficiencia:} La Búsqueda A*, gracias a su heurística, es eficiente para avanzar por el camino de menor coste, lo que en este caso particular requirió una menor expansión de nodos. Al explorar de forma dirigida utilizando costes acumulados y heurística, el coste computacional se mantiene bajo, requiriendo expandir solo 26 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 10 nodos para mantener el registro de las posiciones pendientes por visitar.
@@ -323,7 +323,44 @@ Tambien en la entrega se adjunta el jupyter notebook con el codigo modificado pa
     \item Si la respuesta a la pregunta 6 es no en algún caso, ¿puede probar esta afirmación diseñando un mapa (variable MAP) que compruebe este hecho? Añada este mapa y sus resultados a la tabla original.
     \end{enumerate}
 \subsection{Análisis que sustentan las respuestas}
+El Caso 3 ejecuta el algoritmo de Búsqueda A* usando tres diferentes heurísticas: Manhattan (H1), Chebyshev (H2) y Manhattan ponderada multiplicada por 2 (H3). Es válido reutilizar el análisis hecho para la heurística Manhattan desde el Caso 2, ya que no hay cambios al respecto. Para la heurística de Chebyshev, la trazabilidad y sus resultados se detallan a continuación.
+\begin{itemize}
+    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado más su estimación heurística hasta encontrar la meta, garantiza hallar el camino más económico; cualquier ruta alternativa descubierta a través de nodos con mayor coste total estimado no será óptima y quedará descartada.
+    \item \textbf{Eficiencia:} La eficiencia presenta un claro contraste entre tiempo y memoria al compararla con la heurística Manhattan. En cuanto a tiempo computacional, es menos eficiente: al ser una métrica más conservadora (subestima aún más los costes reales hacia la meta), obliga al algoritmo a explorar más rutas alternativas, requiriendo la expansión de 30 nodos (4 más que Manhattan). Sin embargo, en gestión de memoria es más eficiente, ya que logró focalizar mejor las opciones simultáneas, registrando un tamaño máximo en su lista abierta de solo 8 nodos (frente a los 10 que requirió Manhattan).
+    \item \textbf{Completitud:} El algoritmo es completo, lo que garantiza encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de este mapa.
+\end{itemize}
 
+\begin{table}[htpb]
+\centering
+\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
+\hline
+\textbf{Solución} & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (4,4) $\rightarrow$ (4,5) $\rightarrow$ (3,5) \\ \hline
+\textbf{Longitud} & 12 \\ \hline
+\textbf{Coste solución} & 14.0 \\ \hline
+\textbf{Nodos expandidos} & 30 \\ \hline
+\textbf{Tamaño máximo de lista abierta} & 8 \\ \hline
+\end{tabularx}
+\caption{Resumen de resultados - Búsqueda A* (Heurística 2)}
+\end{table}
+Para la heurística de Manhattan ponderada multiplicada por 2, la trazabilidad y sus resultados se detallan a continuación.
+\begin{itemize}
+    \item \textbf{Optimalidad:} El algoritmo no obtuvo la ruta óptima. Entregó una solución de 10 pasos con un coste total de 15.0 (superior al coste óptimo de 14.0). Esto ocurre porque al multiplicar la distancia Manhattan por 2, la estimación sobreestima el coste real hacia la meta, volviendo a la heurística inadmisible. Al perder esta propiedad fundamental de admisibilidad, A* deja de garantizar matemáticamente el hallazgo del camino más económico y se conforma con una ruta subóptima pero rápida.
+    \item \textbf{Eficiencia:} Es la opción más eficiente de los casos evaluados, tanto en tiempo computacional como en memoria, pero lo logra a expensas de sacrificar la optimalidad. Al inflar artificialmente el valor heurístico, el algoritmo adopta un comportamiento marcadamente codicioso (greedy), forzando la exploración directamente hacia la meta sin considerar rutas alternativas. Esto redujo drásticamente el esfuerzo de procesamiento, requiriendo expandir únicamente 13 nodos, y optimizó de forma notable la gestión de memoria, registrando un tamaño máximo en la lista abierta de apenas 5 nodos.
+    \item \textbf{Completitud:} El algoritmo sigue siendo completo, lo que garantiza encontrar la meta si esta existe (incluso si la ruta encontrada no es la mejor). Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de la topología del mapa.
+\end{itemize}
+
+\begin{table}[htpb]
+\centering
+\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
+\hline
+\textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
+\textbf{Longitud} & 10 \\ \hline
+\textbf{Coste solución} & 15.0 \\ \hline
+\textbf{Nodos expandidos} & 13 \\ \hline
+\textbf{Tamaño máximo de lista abierta} & 5 \\ \hline
+\end{tabularx}
+\caption{Resumen de resultados - Búsqueda A* (Heurística 3)}
+\end{table}
 % =========================================================================
 \section{Declaración de uso de IA}
 % =========================================================================
