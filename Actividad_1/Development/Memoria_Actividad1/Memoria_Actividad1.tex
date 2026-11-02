@@ -304,8 +304,15 @@ Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más efici
 \subsection{Respuestas a preguntas planteadas}
 \begin{enumerate}
 
-    \item Muestre una tabla con los datos de todas las ejecuciones.
-    \item Muestre la captura de las soluciones obtenidas para cada ejecución.
+    \item Muestre una tabla con los datos de todas las ejecuciones. Las tabla de trazabilidad se pueden consultar en la \hyperref[anx:a_star_ecli]{Traza Búsqueda A* con Heurística 1 (Euclidiana) \ref{anx:a_star_ecli}, \hyperref[anx:a_star_man]{Traza Búsqueda A* con Heurística 2 (Manhattan)} \ref{anx:a_star_man}}, 
+  y , \hyperref[anx:a_star_2man]{Traza Búsqueda A* con Heuristica 3 (2*Manhattan) \ref{anx:a_star_2man}}.
+    \item Muestre la captura de las soluciones obtenidas para cada ejecución. La ejecucion de los algorithmos A* con sus diferentes heuristicas las podemos demostrar con la generacion dinamica desde el codigo de su grafos de nodos extendidos los que nos da la rerefencia de ejecucion, los grafos a inpecionar son 
+
+\hyperref[fig:exp_astar_h1]{Nodos expandidos - A* con Heurística 1 (Casos 2 y 3), Figura~\ref*{fig:exp_astar_h1}},
+\hyperref[fig:exp_astar_h2]{Nodos expandidos - A* con Heurística 2 (Caso 3), Figura~\ref*{fig:exp_astar_h2}},
+\hyperref[fig:exp_astar_h3]{Nodos expandidos - A* con Heurística 3 (Caso 3), Figura~\ref*{fig:exp_astar_h3}}.\\
+Tambien en la entrega se adjunta el jupyter notebook con el codigo modificado para obtenerlos.
+    
     \item ¿Obtiene UCS (Dijkstra) el camino de coste óptimo? Sí, el algoritmo UCS siempre encuentra el camino de coste óptimo. Al no utilizar funciones heurísticas, su funcionamiento depende exclusivamente del coste real acumulado de los nodos, garantizando encontrar la ruta más barata de manera independiente a cualquier heurística aplicada.
     \item ¿Obtiene A* el camino de coste óptimo con todas las heurísticas? No, solo lo obtiene con las heurísticas 1 y 2. Esto ocurre porque la heurística 3 multiplica por dos la distancia Manhattan, lo que provoca que sobrestime el coste real y se vuelva inadmisible, perdiendo así la garantía de optimalidad.
     
@@ -369,6 +376,15 @@ Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más efici
 26 & (4, 6) & (4, 5) & (3, 5), (6, 4), (4, 4), (5, 5), (5, 6), (4, 5) & (4, 6) \\ \hline
 27 & \textbf{(3, 5)} & Meta  & Búsqueda termina & (3, 5) \\ \hline
 }
+
+\section{Nodos expandidos - Búsqueda en Amplitud (Casos 1 y 2)}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio]{caso1_amplitud_expandidos}
+  \caption{Nodos expandidos - Búsqueda en Amplitud (Casos 1 y 2)}
+  \label{fig:exp_amplitud_caso1_2}
+\end{figure}
+
 \section{Traza Búsqueda en Profundidad Caso 1}
 \label{anx:profundidad_caso1}
 \tablaiteraciones{Traza de iteraciones - Algoritmo de Búsqueda en Profundidad}{tab:iter_profundidad_caso1}{
@@ -393,6 +409,14 @@ Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más efici
 18 & \textbf{(3, 7)} & (2, 7), \textbf{(3, 6)} & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (2, 7), (3, 6) & (3, 7) \\ \hline
 19 & \textbf{(3, 6)}  & Meta  & Búsqueda termina & (3, 6) \\ \hline
 }
+
+\section{Nodos expandidos - Búsqueda en Profundidad (Caso 1)}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio]{caso1_profundidad_expandidos}
+  \caption{Nodos expandidos - Búsqueda en Profundidad (Caso 1)}
+  \label{fig:exp_profundidad_caso1}
+\end{figure}
 
 \section{Traza Búsqueda de Coste Uniforme Caso 2}
 \label{anx:coste_uniforme_caso2}
@@ -433,9 +457,18 @@ Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más efici
 33 & (6, 5) & None & [(6, 5) (13.0)], [(3, 5) (14.0)], [(6, 6) (14.0)] & \dots, (6, 4), (4, 5), (5, 6) \\ \hline
 34 & \textbf{(3, 5)} & None (Meta) & [(3, 5) (14.0)], [(6, 6) (14.0)] & \dots, (4, 5), (5, 6), (6, 5) \\ \hline
 }
-\section{Traza Búsqueda A* con Heurística 1 Euclidiana}
+
+\section{Nodos expandidos - Búsqueda de Coste Uniforme (Caso 2)}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio]{caso2_ucs_expandidos}
+  \caption{Nodos expandidos - Búsqueda de Coste Uniforme (Caso 2)}
+  \label{fig:exp_ucs_caso2}
+\end{figure}
+
+\section{Traza Búsqueda A* con Heurística 1 (Euclidiana)}
 \label{anx:a_star_ecli}
-\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 1 Euclidiana}{tab:iter_h_1_caso3}{
+\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 1 (Euclidiana)}{tab:iter_h_1_caso3}{
 0 & - & - & [(1, 2) (5.0)] & - \\ \hline
 1 & (1, 2) [f=5.0] & (1, 3), (1, 1) & [(1, 3) (5.0)], [(1, 1) (10.0)] & (1, 2) \\ \hline
 2 & (1, 3) [f=5.0] & (2, 3), (1, 4) & [(2, 3) (5.0)], [(1, 4) (5.0)], [(1, 1) (10.0)] & (1, 2), (1, 3) \\ \hline
@@ -466,9 +499,17 @@ Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más efici
 27 & (3, 5) [f=14.0] & None (Meta) & [(3, 5) (14.0)], [(6, 7) (15.0)], [(5, 6) (16.0)], [(6, 1) (16.0)], [(6, 2) (16.0)], [(6, 3) (16.0)], [(6, 4) (16.0)], [(6, 5) (16.0)] & \dots, (4, 4), (5, 5), (4, 5) \\ \hline
 }
 
-\section{Traza Búsqueda A* con Heurística 2 Manhattan}
+\section{Nodos expandidos - A* con Heurística 1 (Casos 2 y 3)}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio]{caso3_astar_h1_expandidos}
+  \caption{Nodos expandidos - A* con Heurística 1 (Casos 2 y 3)}
+  \label{fig:exp_astar_h1}
+\end{figure}
+
+\section{Traza Búsqueda A* con Heurística 2 (Manhattan)}
 \label{anx:a_star_man}
-\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 2 Manhattan}{tab:iter_h_2_caso3}{
+\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 2 (Manhattan)}{tab:iter_h_2_caso3}{
 0 & - & - & [(1, 2) (3.0)] & - \\ \hline
 1 & (1, 2) [f=3.0] & (1, 3), (1, 1) & [(1, 3) (3.0)], [(1, 1) (8.0)] & (1, 2) \\ \hline
 2 & (1, 3) [f=3.0] & (2, 3), (1, 4) & [(2, 3) (4.0)], [(1, 4) (4.0)], [(1, 1) (8.0)] & (1, 2), (1, 3) \\ \hline
@@ -503,9 +544,17 @@ Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más efici
 31 & (3, 5) [f=14.0] & None (Meta) & [(3, 5) (14.0)], [(5, 6) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (6, 3), (5, 5), (4, 5) \\ \hline
 }
 
-\section{Traza Búsqueda A* con Heuristica 3 2*Manhattan}
+\section{Nodos expandidos - A* con Heurística 2 (Caso 3)}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio]{caso3_astar_h2_expandidos}
+  \caption{Nodos expandidos - A* con Heurística 2 (Caso 3)}
+  \label{fig:exp_astar_h2}
+\end{figure}
+
+\section{Traza Búsqueda A* con Heurística 3 (2*Manhattan)}
 \label{anx:a_star_2man}
-\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 3 2*Manhattan}{tab:iter_h_1_caso3}{
+\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 3 (2*Manhattan)}{tab:iter_h_3_caso3}{
 0 & - & - & [(1, 2) (10.0)] & - \\ \hline
 1 & (1, 2) [f=10.0] & (1, 3), (1, 1) & [(1, 3) (9.0)], [(1, 1) (16.0)] & (1, 2) \\ \hline
 2 & (1, 3) [f=9.0] & (2, 3), (1, 4) & [(2, 3) (8.0)], [(1, 4) (8.0)], [(1, 1) (16.0)] & (1, 2), (1, 3) \\ \hline
@@ -522,5 +571,13 @@ Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más efici
 13 & (4, 7) [f=14.0] & (5, 7) & [(3, 5) (15.0)], [(1, 1) (16.0)], [(4, 6) (16.0)], [(5, 7) (17.0)], [(3, 1) (19.0)] & \dots, (3, 7), (3, 6), (4, 7) \\ \hline
 14 & (3, 5) [f=15.0] & None (Meta) & [(3, 5) (15.0)], [(1, 1) (16.0)], [(4, 6) (16.0)], [(5, 7) (17.0)], [(3, 1) (19.0)] & \dots, (3, 7), (3, 6), (4, 7) \\ \hline
 }
+
+\section{Nodos expandidos - A* con Heurística 3 (Caso 3)}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio]{caso3_astar_h3_expandidos}
+  \caption{Nodos expandidos - A* con Heurística 3 (Caso 3)}
+  \label{fig:exp_astar_h3}
+\end{figure}
 
 \end{document}
