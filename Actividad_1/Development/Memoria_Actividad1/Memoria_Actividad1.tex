@@ -192,13 +192,7 @@ Los siguientes resultados surgen de el trabajo a mano generado en trazar el algo
     \item \textbf{Eficiencia:} La búsqueda en profundidad sacrifica optimalidad para avanzar de manera directa en profundidad buscando una solución, lo que en este caso en particular requirió menos nodos expandidos. Al explorar de forma exhaustiva y profunda ruta por ruta, el coste computacional es menor, requiriendo expandir 19 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 12 nodos para poder mantener los nodos a visitar.   
     \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
 \end{itemize}
-Al evaluar el coste de ejecución, el algoritmo de búsqueda en profundidad demostró ser más eficiente en tiempo, ya que requirió expandir menos nodos (19 iteraciones frente a las 26 del algoritmo en amplitud). Sin embargo, en cuanto a la eficiencia de memoria, el algoritmo en amplitud fue superior, pues el tamaño máximo de su lista abierta fue de solo 7 nodos, contrastando con los 12 nodos que necesitó almacenar el algoritmo de profundidad.
-Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más eficiente en este caso particular sin antes establecer qué recurso es prioritario optimizar. En resumen:
-\begin{itemize}
-    \item El algoritmo de Búsqueda en Profundidad fue más eficiente en tiempo (expandió menos nodos).
-	\item El algoritmo de Búsqueda en Amplitud fue más eficiente en memoria (su lista abierta fue más pequeña).
-\end{itemize}
-Será el análisis del caso a caso el que dictaminará si el proceso requiere priorizar un menor consumo de memoria o un menor tiempo de procesamiento. En base a esa información y a los requerimientos del sistema, se podrá escoger el algoritmo que mejor cumpla con lo pedido.\\
+
 \noindent  
 \begin{table}[htpb]
 \centering
@@ -212,6 +206,12 @@ Será el análisis del caso a caso el que dictaminará si el proceso requiere pr
 \end{tabularx}
 \caption{Resumen de resultados Caso 1 - Algoritmo de Búsqueda en Profundidad}
 \end{table}\\
+Al evaluar el coste de ejecución, el algoritmo de búsqueda en profundidad demostró ser más eficiente en tiempo, ya que requirió expandir menos nodos (19 iteraciones frente a las 26 del algoritmo en amplitud). Sin embargo, en cuanto a la eficiencia de memoria, el algoritmo en amplitud fue superior, pues el tamaño máximo de su lista abierta fue de solo 7 nodos, contrastando con los 12 nodos que necesitó almacenar el algoritmo de profundidad.
+Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más eficiente en este caso particular sin antes establecer qué recurso es prioritario optimizar. En resumen:
+\begin{itemize}
+    \item El algoritmo de Búsqueda en Profundidad fue más eficiente en tiempo (expandió menos nodos).
+	\item El algoritmo de Búsqueda en Amplitud fue más eficiente en memoria (su lista abierta fue más pequeña).
+\end{itemize}
 % =========================================================================
 \section{Caso 2}
 \subsection{Respuestas a preguntas planteadas}
@@ -245,7 +245,6 @@ Como se destacó en el Caso 1, el algoritmo de Búsqueda en Amplitud es una estr
 \end{tabularx}
 \caption{Resumen de resultados Caso 2 - Algoritmo de Búsqueda en Amplitud}
 \end{table}\\
-
 \subsubsection{Búsqueda de Coste Uniforme}
 Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad que se puede consultar en la \hyperref[anx:coste_uniforme_caso2]{Traza Búsqueda de Coste Uniforme Caso 2 \ref{anx:coste_uniforme_caso2}}. 
 Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la siguiente manera:
@@ -287,8 +286,13 @@ Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la sigui
 \textbf{Tamaño máximo de lista abierta} & 10 \\ \hline
 \end{tabularx}
 \caption{Resumen de resultados - Algoritmo de Búsqueda A*}
-\end{table}
-
+\end{table}\\
+Al evaluar el coste de ejecución, el algoritmo de Búsqueda A* demostró ser más eficiente en tiempo, ya que requirió expandir menos nodos (26 iteraciones frente a las 33 del algoritmo de Coste Uniforme). Sin embargo, en cuanto a la eficiencia de memoria, el algoritmo de Coste Uniforme fue superior, pues el tamaño máximo de su lista abierta fue de solo 8 nodos, contrastando con los 10 nodos que necesitó almacenar el algoritmo A*.
+Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más eficiente en este caso particular sin antes establecer qué recurso es prioritario optimizar. En resumen:
+\begin{itemize}
+    \item El algoritmo de Búsqueda A* fue más eficiente en tiempo (expandió menos nodos).
+	\item El algoritmo de Búsqueda de Coste Uniforme fue más eficiente en memoria (su lista abierta fue más pequeña).
+\end{itemize}
 % =========================================================================
 
 % =========================================================================
