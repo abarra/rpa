@@ -50,7 +50,7 @@
 \usepackage{amsmath}
 \usepackage{xcolor}
 \usepackage{listings}
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
 
 \captionsetup{font=small}
 \lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single}
@@ -154,146 +154,76 @@
 \section{Caso 1}
 \subsection{Respuestas a preguntas planteadas}
 \begin{enumerate}
-  \item Muestre la tabla con los datos de ambas ejecuciones. Las tabla de trazabilidad se pueden consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}} y \hyperref[anx:profundidad_caso1]{Traza para Búsqueda en Profundidad Caso 1 Anexo \ref{anx:profundidad_caso1}}. 
-  \item ¿Obtiene amplitud un resultado óptimo? ¿Por qué? Sí, obtiene un resultado óptimo. En este caso particular, logró una solución de 10 pasos con un coste de 9.0. Como este algoritmo se expande de nivel por nivel, se garantiza que encuentra el camino más corto posible, cualquier ruta alternativa que el algoritmo descubriera en un nivel posterior requeriría, obligatoriamente, procesar más nodos y por ende tendría un coste mayor.
-  \item ¿Obtiene profundidad un resultado óptimo? ¿Por qué? No, no obtiene un resultado óptimo. El algoritmo entregó una solución más larga, de 16 pasos con un coste de 15.0. Esto ocurre porque la búsqueda en profundidad se expande desde el nodo base hasta lo más profundo de una ruta posible sin evaluar todo el nivel de manera uniforme. Por esto mismo, no garantiza el camino más corto, ya que pueden existir rutas alternativas descubiertas más tarde que sean más cortas.
-  \item ¿Cuál de los dos algoritmos es más eficiente en este caso particular? No se puede definir de forma absoluta cuál de los dos es "el más eficiente", ya que esto depende del recurso, tiempo o memoria, que se priorice:   
+  \item \textbf{Muestre la tabla con los datos de ambas ejecuciones.} Los resultados de ambas ejecuciones se resumen en el \hyperref[tab:resultados_caso1]{Cuadro~\ref*{tab:resultados_caso1}} y se comparan con el resto de casos en la \hyperref[fig:comparativa]{Figura~\ref*{fig:comparativa}}. Las tablas de trazabilidad se pueden consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Casos 1 y 2, Anexo~\ref*{anx:amplitud_caso1_2}} y en la \hyperref[anx:profundidad_caso1]{Traza para Búsqueda en Profundidad Caso 1, Anexo~\ref*{anx:profundidad_caso1}}. Los grafos de nodos expandidos se pueden consultar en la \hyperref[fig:exp_amplitud_caso1_2]{Figura~\ref*{fig:exp_amplitud_caso1_2}} (amplitud) y en la \hyperref[fig:exp_profundidad_caso1]{Figura~\ref*{fig:exp_profundidad_caso1}} (profundidad). En toda la memoria las posiciones se expresan como (fila, columna), los grafos generados por el código muestran cada estado como (x, y), es decir, (columna, fila).
+  \item \textbf{¿Obtiene amplitud un resultado óptimo? ¿Por qué?} Sí, obtiene un resultado óptimo. En este caso particular, logró una solución de 10 pasos con un coste de 9.0. Como este algoritmo se expande nivel por nivel, encuentra primero la solución con menos pasos, y como en este caso todos los movimientos cuestan 1, el camino con menos pasos es también el de menor coste. Esta garantía depende de que los costes sean uniformes: en el Caso 2 deja de cumplirse.
+  \item \textbf{¿Obtiene profundidad un resultado óptimo? ¿Por qué?} No, no obtiene un resultado óptimo. El algoritmo entregó una solución más larga, de 16 pasos, con un coste de 15.0. Esto ocurre porque la búsqueda en profundidad se expande desde el nodo base hasta lo más profundo de una ruta posible, sin evaluar cada nivel. Por esto mismo, no garantiza el camino más corto, ya que pueden existir rutas alternativas descubiertas más tarde que sean más cortas.
+  \item \textbf{¿Cuál de los dos algoritmos es más eficiente en este caso particular?} No se puede definir de forma absoluta cuál de los dos es "el más eficiente", ya que esto depende del recurso que se priorice (tiempo o memoria):
   \begin{itemize}
-  \item Eficiencia en Tiempo: La Búsqueda en Profundidad fue más eficiente, ya que requirió expandir menos nodos (solo 19 iteraciones) frente a las 26 del algoritmo en amplitud.   
-  \item Eficiencia en Memoria: La Búsqueda en Amplitud fue superior en este aspecto, ya que el tamaño máximo de su lista abierta alcanzó solo los 7 nodos de forma simultánea, contrastando con los 12 nodos que necesitó almacenar en memoria el algoritmo en profundidad.
+  \item Eficiencia en tiempo: la búsqueda en profundidad fue más eficiente, ya que requirió expandir menos nodos (solo 19 iteraciones, frente a las 26 del algoritmo en amplitud).
+  \item Eficiencia en memoria: la búsqueda en amplitud fue superior en este aspecto, ya que su lista abierta alcanzó un tamaño máximo de solo 7 nodos simultáneos, frente a los 12 nodos que necesitó almacenar en memoria el algoritmo en profundidad.
     \end{itemize}
 \end{enumerate}
-\subsection{Análisis que sustentan las respuestas}
+\subsection{Análisis que sustenta las respuestas}
 % =========================================================================
-\subsubsection{Búsqueda en Amplitud}
-Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad se puede consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}}. 
-Los resultados del algoritmo Búsqueda en Amplitud se analizan de la siguiente manera:
-\begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 10 pasos con un coste total de 9.0, confirmando que es la ruta óptima. Dado que este método se expande nivel por nivel, garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores tendría obligatoriamente un coste mayor al requerir más nodos para procesar.
-    \item \textbf{Eficiencia:} Para asegurar esta solución óptima, la búsqueda en amplitud sacrifica recursos de tiempo y memoria. Al explorar de forma exhaustiva y amplia por nivel, el coste computacional se elevada, requiriendo expandir 26 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 7 nodos para poder mantener los nodos a visitar.
-    \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los estados ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
-\end{itemize}
-\begin{table}[htpb]
-\centering
-\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
-\textbf{Longitud} & 10 \\ \hline
-\textbf{Coste solución} & 9.0 \\ \hline
-\textbf{Nodos expandidos} & 26 \\ \hline
-\textbf{Tamaño máximo de lista abierta} & 7 \\ \hline
-\end{tabularx}
-\caption{Resumen de resultados Caso 1 - Algoritmo de Búsqueda en Amplitud}
-\end{table}
-\subsubsection{Búsqueda en Profundidad}
-Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad se puede consultar en la \hyperref[anx:profundidad_caso1]{Traza para Búsqueda en Profundidad Caso 1 Anexo \ref{anx:profundidad_caso1}}. Los resultados del algoritmo en profundidad se analizan de la siguiente manera:
-\begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 16 pasos con un coste total de 15.0, lo que no confirma que es la ruta óptima. Dado que este método se expande desde el nodo base hasta lo más profundo de una ruta, este no garantiza encontrar el camino más corto, cualquier ruta alternativa descubierta en niveles posteriores podría ser más corta que la primera ruta profunda encontrada.
-    \item \textbf{Eficiencia:} La búsqueda en profundidad sacrifica optimalidad para avanzar de manera directa en profundidad buscando una solución, lo que en este caso en particular requirió menos nodos expandidos. Al explorar de forma exhaustiva y profunda ruta por ruta, el coste computacional es menor, requiriendo expandir 19 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 12 nodos para poder mantener los nodos a visitar.   
-    \item \textbf{Completitud:} El algoritmo es completo, garantizando encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya visitados y por visitar, el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa.
-\end{itemize}
+Los resultados del \hyperref[tab:resultados_caso1]{Cuadro~\ref*{tab:resultados_caso1}} se obtienen de la ejecución del notebook y se verifican paso a paso con las trazas de los anexos.
 
-\noindent  
-\begin{table}[htpb]
+\begin{table}[H]
 \centering
-\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
+\small
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}X|C{1.1cm}|C{1.1cm}|C{1.3cm}|C{1.5cm}|}
 \hline
-\textbf{Solución} & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (5,5) $\rightarrow$ (5,6) $\rightarrow$ (5,7) $\rightarrow$ (4,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
-\textbf{Longitud} & 16 \\ \hline
-\textbf{Coste solución} & 15.0 \\ \hline
-\textbf{Nodos expandidos} & 19 \\ \hline
-\textbf{Tamaño máximo de lista abierta} & 12 \\ \hline
+\textbf{Algoritmo} & \textbf{Solución} & \textbf{Long.} & \textbf{Coste} & \textbf{Nodos exp.} & \textbf{Máx. lista abierta} \\ \hline
+Amplitud & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) & 10 & 9.0 & 26 & 7 \\ \hline
+Profundidad & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (5,5) $\rightarrow$ (5,6) $\rightarrow$ (5,7) $\rightarrow$ (4,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) & 16 & 15.0 & 19 & 12 \\ \hline
 \end{tabularx}
-\caption{Resumen de resultados Caso 1 - Algoritmo de Búsqueda en Profundidad}
-\end{table}\\
-Al evaluar el coste de ejecución, el algoritmo de búsqueda en profundidad demostró ser más eficiente en tiempo, ya que requirió expandir menos nodos (19 iteraciones frente a las 26 del algoritmo en amplitud). Sin embargo, en cuanto a la eficiencia de memoria, el algoritmo en amplitud fue superior, pues el tamaño máximo de su lista abierta fue de solo 7 nodos, contrastando con los 12 nodos que necesitó almacenar el algoritmo de profundidad.
-Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más eficiente en este caso particular sin antes establecer qué recurso es prioritario optimizar. En resumen:
+\caption{Resumen de resultados Caso 1 -- Búsqueda en Amplitud y Búsqueda en Profundidad}
+\label{tab:resultados_caso1}
+\end{table}
+
 \begin{itemize}
-    \item El algoritmo de Búsqueda en Profundidad fue más eficiente en tiempo (expandió menos nodos).
-	\item El algoritmo de Búsqueda en Amplitud fue más eficiente en memoria (su lista abierta fue más pequeña).
+    \item \textbf{Optimalidad:} La búsqueda en amplitud obtuvo la ruta óptima (10 pasos, coste 9.0), con costes de valor 1 para todos los movimientos, el primer camino que alcanza la meta al avanzar nivel por nivel es también el de menor coste. La búsqueda en profundidad, en cambio, devuelve el primer camino que encuentra al descender por una rama (16 pasos, coste 15.0), sin compararlo con alternativas más cortas descubiertas después, por lo que no es óptima.
+    \item \textbf{Eficiencia:} La profundidad expandió menos nodos (19 frente a 26) porque la primera rama que exploró llegó a la meta, mientras que la amplitud debe agotar cada nivel antes de pasar al siguiente. En memoria, la amplitud fue más eficiente: su lista abierta llegó a 7 nodos, frente a los 12 de la profundidad. Esto se debe a que, cada vez que la profundidad avanza un paso, deja guardados en la lista abierta los caminos alternativos que no tomó, como su recorrido fue largo (15 movimientos), esos pendientes se fueron acumulando. La amplitud, en cambio, avanzó por pasillos estrechos con pocas opciones a la vez, por lo que su lista abierta se mantuvo pequeña.
+    \item \textbf{Completitud:} Ambos algoritmos son completos, lo que garantiza encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los estados ya visitados (los nodos pendientes por visitar se mantienen en la lista abierta), el sistema evita reprocesar nodos y previene caer en ciclos infinitos dentro de este mapa. Sin esa lista, la profundidad podría quedar atrapada en ciclos y dejaría de ser completa.
 \end{itemize}
 % =========================================================================
 \section{Caso 2}
 \subsection{Respuestas a preguntas planteadas}
 \begin{enumerate}
-  \item 
-  Muestre una tabla con los datos de todas las ejecuciones. 
-  Las tabla de trazabilidad se pueden consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Caso 1 y 2 Anexo \ref{anx:amplitud_caso1_2}, \hyperref[anx:coste_uniforme_caso2]{Traza Búsqueda de Coste Uniforme Caso 2 Anexo} \ref{anx:coste_uniforme_caso2}}, 
-  y , \hyperref[anx:a_star_ecli]{Traza Búsqueda A* con Heurística 1 Euclidiana \ref{anx:a_star_ecli}}.
-  \item ¿Obtiene UCS (Dijkstra) el camino de coste óptimo? Sí, encuentra el camino óptimo. Dado que la Búsqueda de Coste Uniforme (UCS) explora sistemáticamente los nodos en orden de menor a mayor según su coste acumulado, garantiza encontrar la solución con el menor coste total (14.0 en este escenario).  
-  \item ¿Obtiene A* el camino de coste óptimo? Sí, encuentra el camino óptimo. Al emplear una función heurística admisible (como la distancia Manhattan en este caso), el algoritmo asegura que el coste estimado nunca sobrestime el coste real, encontrando de manera certera la solución óptima de coste 14.0.
-  \item ¿Cuál de los dos algoritmos (UCS o A*) es más eficiente en el caso planteado? La eficiencia depende del recurso que se priorice:
+  \item
+  \textbf{Muestre una tabla con los datos de todas las ejecuciones.}
+  Los resultados de las tres ejecuciones se resumen en el \hyperref[tab:resultados_caso2]{Cuadro~\ref*{tab:resultados_caso2}} y en la \hyperref[fig:comparativa]{Figura~\ref*{fig:comparativa}}. Las tablas de trazabilidad se pueden consultar en la \hyperref[anx:amplitud_caso1_2]{Traza para Búsqueda en Amplitud Casos 1 y 2, Anexo~\ref*{anx:amplitud_caso1_2}}, en la \hyperref[anx:coste_uniforme_caso2]{Traza Búsqueda de Coste Uniforme Caso 2, Anexo~\ref*{anx:coste_uniforme_caso2}} y en la \hyperref[anx:a_star_ecli]{Traza Búsqueda A* con Heurística 1 (Manhattan), Anexo~\ref*{anx:a_star_ecli}}. Los grafos de nodos expandidos se pueden consultar en la \hyperref[fig:exp_amplitud_caso1_2]{Figura~\ref*{fig:exp_amplitud_caso1_2}} (amplitud), en la \hyperref[fig:exp_ucs_caso2]{Figura~\ref*{fig:exp_ucs_caso2}} (coste uniforme) y en la \hyperref[fig:exp_astar_h1]{Figura~\ref*{fig:exp_astar_h1}} (A*).
+  \item \textbf{¿Obtiene UCS (Dijkstra) el camino de coste óptimo?} Sí, encuentra el camino óptimo. Dado que la búsqueda de coste uniforme (UCS) explora sistemáticamente los nodos en orden de menor a mayor coste acumulado, garantiza encontrar la solución con el menor coste total (14.0 en este escenario).
+  \item \textbf{¿Obtiene A* el camino de coste óptimo?} Sí, encuentra el camino óptimo. Al emplear una función heurística admisible (como la distancia Manhattan en este caso), el algoritmo asegura que el coste estimado nunca sobrestime el coste real, y encuentra de manera certera la solución óptima de coste 14.0.
+  \item \textbf{¿Cuál de los dos algoritmos (UCS o A*) es más eficiente en el caso planteado?} La eficiencia depende del recurso que se priorice:
 	\begin{itemize}
-		\item En términos de tiempo de ejecución, A* es superior, ya que requiere expandir un menor número de nodos, 26 frente a los 33 de UCS.
-		\item En términos de uso de memoria, UCS resulta más eficiente, puesto que su lista abierta mantiene un tamaño máximo menor, 8 nodos frente a los 10 de A*.
+		\item En términos de tiempo de ejecución, A* es superior, ya que requiere expandir un menor número de nodos: 26, frente a los 33 de UCS.
+		\item En términos de uso de memoria, UCS resulta más eficiente, puesto que su lista abierta mantiene un tamaño máximo menor: 8 nodos, frente a los 10 de A*.
 	\end{itemize}
-  \item ¿Se puede afirmar que las respuestas 2 y 3 siempre serán de este modo, aunque se varíe el mapa? Para el caso de UCS, la respuesta se mantiene siempre afirmativa, ya que su optimalidad depende únicamente de los costes reales y no de heurísticas. Para A*, esto solo se cumple de manera garantizada si la heurística utilizada es admisible (es decir, si nunca sobreestima el coste real hacia la meta). De lo contrario, A* no asegura encontrar el camino de coste óptimo.
-  \item ¿Se puede afirmar que las respuestas 2 y 3 siempre serán de este modo, aunque se varíen los costes? Sí, UCS seguirá encontrando el camino de coste mínimo ante cualquier variación positiva de los costes. Para A*, el comportamiento óptimo se conservará siempre y cuando la heurística siga siendo admisible bajo la nueva configuración de costes, si deja de serlo, la optimalidad del algoritmo ya no estará garantizada.
+  \item \textbf{¿Se puede afirmar que las respuestas 2 y 3 siempre serán de este modo, aunque se varíe el mapa?} Sí, mientras no cambien los costes. UCS es óptimo en cualquier mapa, ya que su optimalidad depende únicamente de los costes reales y no de heurísticas. A* con Manhattan también: como cada movimiento cuesta al menos 1, la distancia Manhattan nunca supera el coste real hasta la meta, por lo que sigue siendo admisible en cualquier mapa.
+  \item \textbf{¿Se puede afirmar que las respuestas 2 y 3 siempre serán de este modo, aunque se varíen los costes?} Para UCS, sí: seguirá encontrando el camino de coste mínimo ante cualquier configuración de costes positivos. Para A*, no necesariamente: Manhattan solo es admisible mientras ningún movimiento cueste menos de 1. Por ejemplo, si \texttt{up} costara 0.5, la heurística podría sobrestimar el coste real y A* perdería la garantía de optimalidad.
 \end{enumerate}
 
-\subsection{Análisis que sustentan las respuestas}
-El Caso 2 ejecuta los algoritmos de Búsqueda en Amplitud, Búsqueda de Coste Uniforme y Búsqueda A*. Los tres algoritmos se analizarán en este caso para responder las preguntas requeridas. Primero se presentan los resultados de ejecución para el algoritmo de Búsqueda en Amplitud.
-Como se destacó en el Caso 1, el algoritmo de Búsqueda en Amplitud es una estrategia no informada, lo que hace que los costos de transición no se evalúen para tomar decisiones. Por lo tanto, en el Caso 2, donde los costes no son uniformes, la ejecución del algoritmo no se altera y el resultado es el mismo. Entonces, es válido reutilizar la \hyperref[anx:amplitud_caso1_2]{tabla de trazabilidad}, y el análisis del caso anterior. La única diferencia es que el coste de solución, en vez de ser 9.0, ahora es 15.0 dado que el coste ya no es uniforme, como lo expresa la siguiente tabla de resultados para el algoritmo.
-\noindent  
-\begin{table}[htpb]
+\subsection{Análisis que sustenta las respuestas}
+Los resultados del \hyperref[tab:resultados_caso2]{Cuadro~\ref*{tab:resultados_caso2}} se obtienen de la ejecución del notebook y se verifican con las trazas de los anexos. Como se destacó en el Caso 1, la búsqueda en amplitud es una estrategia no informada que no evalúa los costes de transición para tomar decisiones, por eso su ejecución no cambia y es válido reutilizar la \hyperref[anx:amplitud_caso1_2]{tabla de trazabilidad} del caso anterior. Lo que cambia es el coste de su solución: 15.0 en vez de 9.0, mayor que el óptimo de 14.0 que obtienen UCS y A*. Con costes no uniformes, el camino con menos pasos ya no es el más barato (incluye dos movimientos \texttt{left} de coste 4), por lo que la amplitud deja de ser óptima. La comparación con el Caso 1 confirma que su optimalidad dependía de que todos los costes fueran iguales.
+
+\begin{table}[H]
 \centering
-\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
+\small
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}X|C{1.1cm}|C{1.1cm}|C{1.3cm}|C{1.5cm}|}
 \hline
-\textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
-\textbf{Longitud} & 10 \\ \hline
-\textbf{Coste solución} & 15.0 \\ \hline
-\textbf{Nodos expandidos} & 26 \\ \hline
-\textbf{Tamaño máximo de lista abierta} & 7 \\ \hline
+\textbf{Algoritmo} & \textbf{Solución} & \textbf{Long.} & \textbf{Coste} & \textbf{Nodos exp.} & \textbf{Máx. lista abierta} \\ \hline
+Amplitud & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) & 10 & 15.0 & 26 & 7 \\ \hline
+Coste uniforme & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (4,4) $\rightarrow$ (4,5) $\rightarrow$ (3,5) & 12 & 14.0 & 33 & 8 \\ \hline
+A* & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (4,4) $\rightarrow$ (4,5) $\rightarrow$ (3,5) & 12 & 14.0 & 26 & 10 \\ \hline
 \end{tabularx}
-\caption{Resumen de resultados Caso 2 - Algoritmo de Búsqueda en Amplitud}
-\end{table}\\
-\subsubsection{Búsqueda de Coste Uniforme}
-Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad que se puede consultar en la \hyperref[anx:coste_uniforme_caso2]{Traza Búsqueda de Coste Uniforme Caso 2 \ref{anx:coste_uniforme_caso2}}. 
-Los resultados del algoritmo Búsqueda de Coste Uniforme se analizan de la siguiente manera:
-\begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado hasta encontrar la meta, garantiza hallar el camino más económico, cualquier ruta alternativa descubierta a través de nodos con mayor coste acumulado no será óptima y quedará descartada.
-    \item \textbf{Eficiencia:} La Búsqueda de Coste Uniforme sacrifica eficiencia para avanzar por el camino de menor coste, lo que en este caso particular requirió una mayor expansión de nodos. Al explorar de forma exhaustiva, el coste computacional aumenta, requiriendo expandir 33 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 8 nodos para mantener el registro de las posiciones pendientes por visitar. 
-    \item \textbf{Completitud:} El algoritmo es completo, lo que garantiza encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de este mapa.
-\end{itemize}
-\noindent  
-\begin{table}[htpb]
-\centering
-\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Solución} & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (4,4) $\rightarrow$ (4,5) $\rightarrow$ (3,5) \\ \hline
-\textbf{Longitud} & 12 \\ \hline
-\textbf{Coste solución} & 14.0 \\ \hline
-\textbf{Nodos expandidos} & 33 \\ \hline
-\textbf{Tamaño máximo de lista abierta} & 8 \\ \hline
-\end{tabularx}
-\caption{Resumen de resultados - Algoritmo de Búsqueda de Coste Uniforme}
+\caption{Resumen de resultados Caso 2 -- Búsqueda en Amplitud, Coste Uniforme y A*}
+\label{tab:resultados_caso2}
 \end{table}
-\subsubsection{Búsqueda A*}
-Los siguientes resultados surgen de el trabajo a mano generado en trazar el algoritmo. La tabla de trazabilidad que se puede consultar en la \hyperref[anx:a_star_ecli]{Traza Búsqueda A* con Heurística 1 Euclidiana \ref{anx:a_star_ecli}}. 
-Los resultados del algoritmo Búsqueda A* se analizan de la siguiente manera:
+
 \begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado más su heurística hasta encontrar la meta, garantiza hallar el camino más económico, cualquier ruta alternativa descubierta a través de nodos con mayor coste total estimado no será óptima y quedará descartada.
-    \item \textbf{Eficiencia:} La Búsqueda A*, gracias a su heurística, es eficiente para avanzar por el camino de menor coste, lo que en este caso particular requirió una menor expansión de nodos. Al explorar de forma dirigida utilizando costes acumulados y heurística, el coste computacional se mantiene bajo, requiriendo expandir solo 26 nodos antes de llegar al objetivo. En cuanto a la gestión de memoria, la lista abierta alcanzó un tamaño máximo de 10 nodos para mantener el registro de las posiciones pendientes por visitar.
-    \item \textbf{Completitud:} El algoritmo es completo, lo que garantiza encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de este mapa.
-\end{itemize}
-\noindent  
-\begin{table}[htpb]
-\centering
-\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Solución} & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (4,4) $\rightarrow$ (4,5) $\rightarrow$ (3,5) \\ \hline
-\textbf{Longitud} & 12 \\ \hline
-\textbf{Coste solución} & 14.0 \\ \hline
-\textbf{Nodos expandidos} & 26 \\ \hline
-\textbf{Tamaño máximo de lista abierta} & 10 \\ \hline
-\end{tabularx}
-\caption{Resumen de resultados - Algoritmo de Búsqueda A*}
-\end{table}\\
-Al evaluar el coste de ejecución, el algoritmo de Búsqueda A* demostró ser más eficiente en tiempo, ya que requirió expandir menos nodos (26 iteraciones frente a las 33 del algoritmo de Coste Uniforme). Sin embargo, en cuanto a la eficiencia de memoria, el algoritmo de Coste Uniforme fue superior, pues el tamaño máximo de su lista abierta fue de solo 8 nodos, contrastando con los 10 nodos que necesitó almacenar el algoritmo A*.
-Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más eficiente en este caso particular sin antes establecer qué recurso es prioritario optimizar. En resumen:
-\begin{itemize}
-    \item El algoritmo de Búsqueda A* fue más eficiente en tiempo (expandió menos nodos).
-	\item El algoritmo de Búsqueda de Coste Uniforme fue más eficiente en memoria (su lista abierta fue más pequeña).
+    \item \textbf{Optimalidad:} UCS y A* obtuvieron una solución de 12 pasos con un coste total de 14.0, la ruta óptima. UCS recorre primero los nodos de menor coste acumulado $g(n)$, mientras que A* recorre primero los de menor coste acumulado mas su heurística $f(n) = g(n) + h(n)$, en ambos casos, cualquier ruta alternativa con mayor coste acumulado (o mayor coste total estimado, en A*) queda descartada. 
+    \item \textbf{Eficiencia:} UCS explora de forma uniforme en todas las direcciones según el coste acumulado, lo que en este caso requirió expandir 33 nodos, con una lista abierta máxima de 8. A*, guiado por la heurística, dirige la exploración hacia la meta y solo expandió 26 nodos, aunque su lista abierta llegó a 10.
+    \item \textbf{Completitud:} Ambos algoritmos son completos, lo que garantiza encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar nodos visitados y previene caer en ciclos infinitos dentro de este mapa.
 \end{itemize}
 % =========================================================================
 
@@ -304,66 +234,78 @@ Por lo tanto, no se puede definir de forma absoluta qué algoritmo es más efici
 \subsection{Respuestas a preguntas planteadas}
 \begin{enumerate}
 
-    \item Muestre una tabla con los datos de todas las ejecuciones. Las tabla de trazabilidad se pueden consultar en la \hyperref[anx:a_star_ecli]{Traza Búsqueda A* con Heurística 1 (Euclidiana) \ref{anx:a_star_ecli}, \hyperref[anx:a_star_man]{Traza Búsqueda A* con Heurística 2 (Manhattan)} \ref{anx:a_star_man}}, 
-  y , \hyperref[anx:a_star_2man]{Traza Búsqueda A* con Heuristica 3 (2*Manhattan) \ref{anx:a_star_2man}}.
-    \item Muestre la captura de las soluciones obtenidas para cada ejecución. La ejecucion de los algorithmos A* con sus diferentes heuristicas las podemos demostrar con la generacion dinamica desde el codigo de su grafos de nodos extendidos los que nos da la rerefencia de ejecucion, los grafos a inpecionar son 
-
+    \item \textbf{Muestre una tabla con los datos de todas las ejecuciones.} Los resultados de las tres heurísticas, junto con UCS como referencia y las ejecuciones del mapa de la pregunta 7, se resumen en el \hyperref[tab:resultados_caso3]{Cuadro~\ref*{tab:resultados_caso3}}. Las tablas de trazabilidad se pueden consultar en la \hyperref[anx:a_star_ecli]{Traza Búsqueda A* con Heurística 1 (Manhattan), Anexo~\ref*{anx:a_star_ecli}}, en la \hyperref[anx:a_star_man]{Traza Búsqueda A* con Heurística 2 (Chebyshev), Anexo~\ref*{anx:a_star_man}} y en la \hyperref[anx:a_star_2man]{Traza Búsqueda A* con Heurística 3 (2*Manhattan), Anexo~\ref*{anx:a_star_2man}}.
+    \item \textbf{Muestre la captura de las soluciones obtenidas para cada ejecución.} La ejecución del algoritmo A* con sus diferentes heurísticas se puede demostrar mediante los grafos de nodos expandidos, generados dinámicamente desde el código, en los que se resalta el camino solución:
 \hyperref[fig:exp_astar_h1]{Nodos expandidos - A* con Heurística 1 (Casos 2 y 3), Figura~\ref*{fig:exp_astar_h1}},
-\hyperref[fig:exp_astar_h2]{Nodos expandidos - A* con Heurística 2 (Caso 3), Figura~\ref*{fig:exp_astar_h2}},
-\hyperref[fig:exp_astar_h3]{Nodos expandidos - A* con Heurística 3 (Caso 3), Figura~\ref*{fig:exp_astar_h3}}.\\
-Tambien en la entrega se adjunta el jupyter notebook con el codigo modificado para obtenerlos.
-    
-    \item ¿Obtiene UCS (Dijkstra) el camino de coste óptimo? Sí, el algoritmo UCS siempre encuentra el camino de coste óptimo. Al no utilizar funciones heurísticas, su funcionamiento depende exclusivamente del coste real acumulado de los nodos, garantizando encontrar la ruta más barata de manera independiente a cualquier heurística aplicada.
-    \item ¿Obtiene A* el camino de coste óptimo con todas las heurísticas? No, solo lo obtiene con las heurísticas 1 y 2. Esto ocurre porque la heurística 3 multiplica por dos la distancia Manhattan, lo que provoca que sobrestime el coste real y se vuelva inadmisible, perdiendo así la garantía de optimalidad.
-    
-    \item ¿Es el algoritmo A* igualmente eficiente en todos los casos planteados? No, no son igualmente eficientes. La heurística 3 resulta ser la más rápida en términos de nodos expandidos y memoria en la lista abierta, pero lo logra porque al ser inadmisible fuerza la exploración sacrificando la optimalidad. Entre las admisibles, la heurística 2 muestra un comportamiento más conservador y subestima más el coste que la heurística 1, lo que hace que A* tienda a comportarse de manera similar a UCS y requiera más iteraciones (31 frente a 27).
-
-    \item ¿Se puede afirmar que la respuesta 4 no variaría al cambiar las paredes del mapa y las posiciones de inicio y fin que aparecen en el mapa para ninguna de las heurísticas presentadas? No, sí podría variar. La eficiencia, el comportamiento de los algoritmos y la admisibilidad de una heurística dependen directamente de la topología del mapa, la disposición de los obstáculos y los costes de las transiciones. Si se modifican el mapa o los puntos de origen y destino, las distancias reales cambian, por lo que una heurística que antes era admisible podría dejar de serlo o el rendimiento relativo entre las distintas heurísticas podría alterarse por completo.
-    
-    \item Si la respuesta a la pregunta 6 es no en algún caso, ¿puede probar esta afirmación diseñando un mapa (variable MAP) que compruebe este hecho? Añada este mapa y sus resultados a la tabla original.
+\hyperref[fig:exp_astar_h2]{Nodos expandidos - A* con Heurística 2 (Caso 3), Figura~\ref*{fig:exp_astar_h2}} y
+\hyperref[fig:exp_astar_h3]{Nodos expandidos - A* con Heurística 3 (Caso 3), Figura~\ref*{fig:exp_astar_h3}}.
+Además, en la entrega se adjunta el notebook de Jupyter con el código modificado para obtenerlos.
+    \item \textbf{¿Obtiene UCS (Dijkstra) el camino de coste óptimo?} Sí. El código del Caso 3 no ejecuta UCS, pero el mapa y los costes son los mismos que en el Caso 2, por lo que su resultado (coste 14.0) sirve como referencia. Al no utilizar funciones heurísticas, su funcionamiento depende exclusivamente del coste real acumulado, lo que garantiza encontrar la ruta más barata. 
+    \item \textbf{¿Obtiene A* el camino de coste óptimo con todas las heurísticas?} No, solo lo obtiene con las heurísticas 1 y 2. Esto ocurre porque la heurística 3 multiplica por dos la distancia Manhattan, lo que provoca que sobrestime el coste real y se vuelva inadmisible, con lo que se pierde la garantía de optimalidad.
+    \item \textbf{¿Es el algoritmo A* igualmente eficiente en todos los casos planteados?} No, no es igualmente eficiente. La heurística 3 resulta ser la más rápida en términos de nodos expandidos y de memoria en la lista abierta, pero lo logra porque, al ser inadmisible, fuerza la exploración sacrificando la optimalidad. Entre las admisibles, H1 domina a H2, ya que siempre estima un valor igual o mayor sin superar el coste real. Por eso A* con H1 expandió menos nodos (26 frente a 30), mientras que H2, que subestima más el coste restante, hace que A* se comporte de manera más parecida a UCS.
+    \item \textbf{¿Se puede afirmar que la respuesta 4 no variaría al cambiar las paredes del mapa y las posiciones de inicio y fin que aparecen en el mapa para ninguna de las heurísticas presentadas?} Depende de la heurística. Para H1 y H2 no varía: como todo movimiento cuesta al menos 1, Manhattan (y Chebyshev, que nunca es mayor) no supera el coste real hasta la meta, pues las paredes solo alargan el camino, ambas son admisibles y consistentes en cualquier mapa, y A* siempre obtiene el óptimo. Para H3 sí puede variar: al ser inadmisible pierde la garantía de optimalidad, pero no falla siempre, según el mapa, puede encontrar o no el camino óptimo.
+    \newpage
+    \item \textbf{Si la respuesta a la pregunta 6 es no en algún caso, ¿puede probar esta afirmación diseñando un mapa (variable MAP) que compruebe este hecho? Añada este mapa y sus resultados a la tabla original.}\\
+\begin{minipage}[t]{0.74\linewidth}
+Sí. Se diseñó el mapa de la derecha, en el que se modifican las paredes y la posición del paquete, y se mantienen los costes del Caso 3. Las ejecuciones (filas «P7» del \hyperref[tab:resultados_caso3]{Cuadro~\ref*{tab:resultados_caso3}}) muestran que A* con H3 obtiene ahora el coste óptimo de 11.0, igual que UCS, H1 y H2, aunque el camino incluye un movimiento \texttt{left}. H3 sigue siendo inadmisible (por ejemplo, en (6,2) estima 2 cuando el coste real es 1), pero en este mapa la ruta hacia la meta coincide con la óptima, de modo que la respuesta 4 cambia para H3.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{2pt}\singlespacing\footnotesize
+\begin{verbatim}
+#########
+# T     #
+# ##### #
+#   #   #
+# ## ## #
+#    #  #
+#  P    #
+#########
+\end{verbatim}
+\end{minipage}
     \end{enumerate}
-\subsection{Análisis que sustentan las respuestas}
-El Caso 3 ejecuta el algoritmo de Búsqueda A* usando tres diferentes heurísticas: Manhattan (H1), Chebyshev (H2) y Manhattan ponderada multiplicada por 2 (H3). Es válido reutilizar el análisis hecho para la heurística Manhattan desde el Caso 2, ya que no hay cambios al respecto. Para la heurística de Chebyshev, la trazabilidad y sus resultados se detallan a continuación.
+\subsection{Análisis que sustenta las respuestas}
+El Caso 3 ejecuta el algoritmo de búsqueda A* usando tres heurísticas diferentes: Manhattan (H1), Chebyshev (H2) y Manhattan ponderada, multiplicada por 2 (H3). Es válido reutilizar el análisis hecho en el Caso 2 para la heurística Manhattan, ya que no hay cambios al respecto. Las heurísticas de Chebyshev y Manhattan ponderada se analizan a continuación, el \hyperref[tab:resultados_caso3]{Cuadro~\ref*{tab:resultados_caso3}} resume todas las ejecuciones y la \hyperref[fig:comparativa]{Figura~\ref*{fig:comparativa}} compara la eficiencia de todos los casos en el mapa original.\\
+\begin{table}[!t]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}X|C{1.1cm}|C{1.1cm}|C{1.3cm}|C{1.5cm}|}
+\hline
+\textbf{Algoritmo} & \textbf{Solución} & \textbf{Long.} & \textbf{Coste} & \textbf{Nodos exp.} & \textbf{Máx. lista abierta} \\ \hline
+UCS (referencia, Caso 2) & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (4,4) $\rightarrow$ (4,5) $\rightarrow$ (3,5) & 12 & 14.0 & 33 & 8 \\ \hline
+A* H1 (Manhattan) & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (4,4) $\rightarrow$ (4,5) $\rightarrow$ (3,5) & 12 & 14.0 & 26 & 10 \\ \hline
+A* H2 (Chebyshev) & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (4,4) $\rightarrow$ (4,5) $\rightarrow$ (3,5) & 12 & 14.0 & 30 & 8 \\ \hline
+A* H3 (2*Manhattan) & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) & 10 & 15.0 & 13 & 5 \\ \hline
+P7: UCS & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (6,1) $\rightarrow$ (6,2) $\rightarrow$ (6,3) & 9 & 11.0 & 24 & 6 \\ \hline
+P7: A* H1 & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (6,1) $\rightarrow$ (6,2) $\rightarrow$ (6,3) & 9 & 11.0 & 15 & 4 \\ \hline
+P7: A* H2 & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (6,3) & 9 & 11.0 & 19 & 6 \\ \hline
+P7: A* H3 & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (6,1) $\rightarrow$ (6,2) $\rightarrow$ (6,3) & 9 & 11.0 & 11 & 4 \\ \hline
+\end{tabularx}
+\caption{Resumen de resultados Caso 3 -- A* con las heurísticas 1, 2 y 3, UCS como referencia y mapa de la pregunta 7 (P7)}
+\label{tab:resultados_caso3}
+\end{table}
+
 \begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo obtuvo una solución de 12 pasos con un coste total de 14.0, lo que confirma que es la ruta óptima. Dado que este método se expande desde el nodo base recorriendo primero los nodos de menor coste acumulado más su estimación heurística hasta encontrar la meta, garantiza hallar el camino más económico; cualquier ruta alternativa descubierta a través de nodos con mayor coste total estimado no será óptima y quedará descartada.
-    \item \textbf{Eficiencia:} La eficiencia presenta un claro contraste entre tiempo y memoria al compararla con la heurística Manhattan. En cuanto a tiempo computacional, es menos eficiente: al ser una métrica más conservadora (subestima aún más los costes reales hacia la meta), obliga al algoritmo a explorar más rutas alternativas, requiriendo la expansión de 30 nodos (4 más que Manhattan). Sin embargo, en gestión de memoria es más eficiente, ya que logró focalizar mejor las opciones simultáneas, registrando un tamaño máximo en su lista abierta de solo 8 nodos (frente a los 10 que requirió Manhattan).
-    \item \textbf{Completitud:} El algoritmo es completo, lo que garantiza encontrar la meta si esta existe. Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de este mapa.
+    \item \textbf{Optimalidad:} Con la heurística de Chebyshev, el algoritmo obtuvo la ruta óptima (12 pasos, coste 14.0): al ser admisible y consistente, A* garantiza hallar el camino más económico. Con la heurística Manhattan ponderada, en cambio, no obtuvo la ruta óptima: entregó una solución de 10 pasos con un coste de 15.0. Al multiplicar la distancia Manhattan por 2, la estimación sobrestima el coste real hasta la meta y la heurística se vuelve inadmisible, A* deja así de garantizar el camino más económico y se conforma con una ruta subóptima pero rápida.
+    \item \textbf{Eficiencia:} Con Chebyshev, A* expandió 30 nodos, 4 más que con Manhattan. Esto se debe a que Chebyshev calcula una distancia hasta la meta igual o menor que Manhattan: solo cuenta la mayor de las dos diferencias (filas o columnas), mientras que Manhattan suma ambas. Al estimar que falta menos de lo que realmente falta, Chebyshev orienta peor la búsqueda y A* tiene que revisar más caminos antes de llegar a la meta. Su lista abierta máxima (8) coincide con la de UCS, lo que muestra que, cuanto menos ayuda la heurística, más se parece A* a UCS, que no usa ninguna estimación. La Manhattan multiplicada por 2 es la opción más eficiente, tanto en tiempo como en memoria (13 nodos expandidos y una lista abierta de 5), pero a costa de no encontrar el camino más barato: al exagerar la distancia que falta, el algoritmo se lanza directamente hacia la meta sin revisar otras rutas.
+    \item \textbf{Completitud:} Con ambas heurísticas el algoritmo es completo, lo que garantiza encontrar la meta si esta existe (con la heurística ponderada, aunque la ruta encontrada no sea la mejor). Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de la topología del mapa.
 \end{itemize}
 
-\begin{table}[htpb]
+\begin{figure}[H]
 \centering
-\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Solución} & (1,2) $\rightarrow$ (1,1) $\rightarrow$ (2,1) $\rightarrow$ (3,1) $\rightarrow$ (4,1) $\rightarrow$ (5,1) $\rightarrow$ (5,2) $\rightarrow$ (5,3) $\rightarrow$ (5,4) $\rightarrow$ (4,4) $\rightarrow$ (4,5) $\rightarrow$ (3,5) \\ \hline
-\textbf{Longitud} & 12 \\ \hline
-\textbf{Coste solución} & 14.0 \\ \hline
-\textbf{Nodos expandidos} & 30 \\ \hline
-\textbf{Tamaño máximo de lista abierta} & 8 \\ \hline
-\end{tabularx}
-\caption{Resumen de resultados - Búsqueda A* (Heurística 2)}
-\end{table}
-Para la heurística de Manhattan ponderada multiplicada por 2, la trazabilidad y sus resultados se detallan a continuación.
-\begin{itemize}
-    \item \textbf{Optimalidad:} El algoritmo no obtuvo la ruta óptima. Entregó una solución de 10 pasos con un coste total de 15.0 (superior al coste óptimo de 14.0). Esto ocurre porque al multiplicar la distancia Manhattan por 2, la estimación sobreestima el coste real hacia la meta, volviendo a la heurística inadmisible. Al perder esta propiedad fundamental de admisibilidad, A* deja de garantizar matemáticamente el hallazgo del camino más económico y se conforma con una ruta subóptima pero rápida.
-    \item \textbf{Eficiencia:} Es la opción más eficiente de los casos evaluados, tanto en tiempo computacional como en memoria, pero lo logra a expensas de sacrificar la optimalidad. Al inflar artificialmente el valor heurístico, el algoritmo adopta un comportamiento marcadamente codicioso (greedy), forzando la exploración directamente hacia la meta sin considerar rutas alternativas. Esto redujo drásticamente el esfuerzo de procesamiento, requiriendo expandir únicamente 13 nodos, y optimizó de forma notable la gestión de memoria, registrando un tamaño máximo en la lista abierta de apenas 5 nodos.
-    \item \textbf{Completitud:} El algoritmo sigue siendo completo, lo que garantiza encontrar la meta si esta existe (incluso si la ruta encontrada no es la mejor). Al implementar una lista cerrada para registrar los nodos ya evaluados, el sistema evita reprocesar posiciones redundantes y previene caer en ciclos infinitos dentro de la topología del mapa.
-\end{itemize}
-
-\begin{table}[htpb]
-\centering
-\begin{tabularx}{16cm}{|l|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Solución} & (1,2) $\rightarrow$ (1,3) $\rightarrow$ (1,4) $\rightarrow$ (1,5) $\rightarrow$ (1,6) $\rightarrow$ (1,7) $\rightarrow$ (2,7) $\rightarrow$ (3,7) $\rightarrow$ (3,6) $\rightarrow$ (3,5) \\ \hline
-\textbf{Longitud} & 10 \\ \hline
-\textbf{Coste solución} & 15.0 \\ \hline
-\textbf{Nodos expandidos} & 13 \\ \hline
-\textbf{Tamaño máximo de lista abierta} & 5 \\ \hline
-\end{tabularx}
-\caption{Resumen de resultados - Búsqueda A* (Heurística 3)}
-\end{table}
+\includegraphics[width=\textwidth]{comparativa_algoritmos.pdf}
+\caption{Eficiencia de todas las ejecuciones en el mapa original: nodos expandidos y tamaño máximo de la lista abierta}
+\label{fig:comparativa}
+\end{figure}
 % =========================================================================
 \section{Declaración de uso de IA}
 % =========================================================================
+En la elaboración de esta actividad se utilizó un asistente de IA generativa (Claude, de Anthropic). Las trazas de los anexos, la ejecución de los casos y la primera versión de las respuestas y del análisis son de elaboración propia. La IA se utilizó para:
+\begin{itemize}
+    \item Preparar la plantilla LaTeX, la gráfica comparativa, e incorporar a los anexos los grafos de nodos expandidos.
+    \item Modificar el notebook: crear el componente que dibuja como imagen el grafo de nodos expandidos (\texttt{ExpandedTreeViewer}) y activar su generación en todos los casos, añadir un parámetro para orientarlos por algoritmo (horizontal o vertical).
+    \item Reorganizar y revisar gramaticalmente mi redacción del análisis, la argumentación teórica y las respuestas a la preguntas.
+    \item Ajustar la maquetación y recortar repeticiones para cumplir la extensión máxima de 8 páginas.
+\end{itemize}
+Todas las aportaciones de la IA se revisaron y se contrastaron con la ejecución del notebook.
 
 
 % =========================================================================
@@ -380,7 +322,7 @@ Para la heurística de Manhattan ponderada multiplicada por 2, la trazabilidad y
 \newcommand{\prefix@section}{Anexo~}
 \makeatother
 
-\section{Traza Búsqueda en Amplitud Caso 1 y 2}
+\section{Traza Búsqueda en Amplitud Casos 1 y 2}
 \label{anx:amplitud_caso1_2}
 
 \tablaiteraciones{Traza de iteraciones - Algoritmo de Búsqueda en Amplitud}{tab:iter_amplitud_caso1_2}{
@@ -444,7 +386,8 @@ Para la heurística de Manhattan ponderada multiplicada por 2, la trazabilidad y
 16 & (6, 7) & None & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (4, 7) & (6, 7) \\ \hline
 17 & \textbf{(4, 7)} & \textbf{(3, 7)} & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (3, 7) & (4, 7) \\ \hline
 18 & \textbf{(3, 7)} & (2, 7), \textbf{(3, 6)} & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (2, 7), (3, 6) & (3, 7) \\ \hline
-19 & \textbf{(3, 6)}  & Meta  & Búsqueda termina & (3, 6) \\ \hline
+19 & \textbf{(3, 6)} & \textbf{(3, 5)} & (1, 3), (6, 1), (6, 2), (6, 3), (4, 4), (6, 4), (4, 5), (6, 5), (4, 6), (6, 6), (2, 7), (3, 5) & (3, 6) \\ \hline
+20 & \textbf{(3, 5)} & Meta  & Búsqueda termina & (3, 5) \\ \hline
 }
 
 \section{Nodos expandidos - Búsqueda en Profundidad (Caso 1)}
@@ -460,39 +403,39 @@ Para la heurística de Manhattan ponderada multiplicada por 2, la trazabilidad y
 \tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda de Coste Uniforme}{tab:iter_coste_uni_caso2}{
 0 & - & - & [(1, 2) (0.0)] & - \\ \hline
 1 & \textbf{(1, 2)} & (1, 3), \textbf{(1, 1)} & [(1, 3) (1.0)], [(1, 1) (4.0)] & (1, 2) \\ \hline
-2 & (1, 3) & (2, 3), (1, 4) & [(1, 3) (1.0)], [(1, 1) (4.0)] & (1, 2) \\ \hline
-3 & (1, 4) & (1, 5) & [(1, 4) (2.0)], [(2, 3) (2.0)], [(1, 1) (4.0)] & (1, 2), (1, 3) \\ \hline
-4 & (2, 3) & (3, 3) & [(2, 3) (2.0)], [(1, 5) (3.0)], [(1, 1) (4.0)] & (1, 2), (1, 3), (1, 4) \\ \hline
-5 & (1, 5) & (1, 6) & [(1, 5) (3.0)], [(3, 3) (3.0)], [(1, 1) (4.0)] & (1, 2), (1, 3), (1, 4), (2, 3) \\ \hline
-6 & (3, 3) & (3, 2) & [(3, 3) (3.0)], [(1, 1) (4.0)], [(1, 6) (4.0)] & \dots, (1, 4), (2, 3), (1, 5) \\ \hline
-7 & \textbf{(1, 1)} & \textbf{(2, 1)} & [(1, 1) (4.0)], [(1, 6) (4.0)], [(3, 2) (7.0)] & \dots, (2, 3), (1, 5), (3, 3) \\ \hline
-8 & (1, 6) & (1, 7) & [(1, 6) (4.0)], [(2, 1) (5.0)], [(3, 2) (7.0)] & \dots, (1, 5), (3, 3), (1, 1) \\ \hline
-9 & (1, 7) & (2, 7) & [(1, 7) (5.0)], [(2, 1) (5.0)], [(3, 2) (7.0)] & \dots, (3, 3), (1, 1), (1, 6) \\ \hline
-10 & \textbf{(2, 1)} & \textbf{(3, 1)} & [(2, 1) (5.0)], [(2, 7) (6.0)], [(3, 2) (7.0)] & \dots, (1, 1), (1, 6), (1, 7) \\ \hline
-11 & (2, 7) & (3, 7) & [(2, 7) (6.0)], [(3, 1) (6.0)], [(3, 2) (7.0)] & \dots, (1, 6), (1, 7), (2, 1) \\ \hline
-12 & \textbf{(3, 1)} & \textbf{(4, 1)} & [(3, 1) (6.0)], [(3, 2) (7.0)], [(3, 7) (7.0)] & \dots, (1, 7), (2, 1), (2, 7) \\ \hline
-13 & (3, 2) & None & [(3, 2) (7.0)], [(3, 7) (7.0)], [(4, 1) (7.0)] & \dots, (2, 1), (2, 7), (3, 1) \\ \hline
-14 & (3, 7) & (4, 7), (3, 6) & [(3, 7) (7.0)], [(4, 1) (7.0)] & \dots, (2, 7), (3, 1), (3, 2) \\ \hline
-15 & \textbf{(4, 1)} & \textbf{(5, 1)} & [(4, 1) (7.0)], [(4, 7) (8.0)], [(3, 6) (11.0)] & \dots, (3, 1), (3, 2), (3, 7) \\ \hline
-16 & (4, 7) & (5, 7), (4, 6) & [(4, 7) (8.0)], [(5, 1) (8.0)], [(3, 6) (11.0)] & \dots, (3, 2), (3, 7), (4, 1) \\ \hline
-17 & \textbf{}(5, 1) & (6, 1), \textbf{(5, 2)} & [(5, 1) (8.0)], [(5, 7) (9.0)], [(3, 6) (11.0)], [(4, 6) (12.0)] & \dots, (3, 7), (4, 1), (4, 7) \\ \hline
-18 & \textbf{(5, 2)} & (6, 2), \textbf{(5, 3)} & [(5, 2) (9.0)], [(5, 7) (9.0)], [(6, 1) (9.0)], [(3, 6) (11.0)], [(4, 6) (12.0)] & \dots, (4, 1), (4, 7), (5, 1) \\ \hline
-19 & (5, 7) & (6, 7), (5, 6) & [(5, 7) (9.0)], [(6, 1) (9.0)], [(5, 3) (10.0)], [(6, 2) (10.0)], [(3, 6) (11.0)], [(4, 6) (12.0)] & \dots, (4, 7), (5, 1), (5, 2) \\ \hline
-20 & (6, 1) & None & [(6, 1) (9.0)], [(5, 3) (10.0)], [(6, 2) (10.0)], [(6, 7) (10.0)], [(3, 6) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)] & \dots, (5, 1), (5, 2), (5, 7) \\ \hline
-21 & \textbf{(5, 3)} & (6, 3), \textbf{(5, 4)} & [(5, 3) (10.0)], [(6, 2) (10.0)], [(6, 7) (10.0)], [(3, 6) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)] & \dots, (5, 2), (5, 7), (6, 1) \\ \hline
-22 & (6, 2) & None & [(6, 2) (10.0)], [(6, 7) (10.0)], [(3, 6) (11.0)], [(5, 4) (11.0)], [(6, 3) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)] & \dots, (5, 7), (6, 1), (5, 3) \\ \hline
-23 & (6, 7) & (6, 6) & [(6, 7) (10.0)], [(3, 6) (11.0)], [(5, 4) (11.0)], [(6, 3) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)] & \dots, (6, 1), (5, 3), (6, 2) \\ \hline
-24 & (3, 6) & (3, 5) & [(3, 6) (11.0)], [(5, 4) (11.0)], [(6, 3) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)], [(6, 6) (14.0)] & \dots, (5, 3), (6, 2), (6, 7) \\ \hline
-25 & \textbf{(5, 4)} & \textbf{(4, 4)}, (6, 4), (5, 5) & [(5, 4) (11.0)], [(6, 3) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (6, 2), (6, 7), (3, 6) \\ \hline
-26 & (6, 3) & None & [(6, 3) (11.0)], [(4, 4) (12.0)], [(4, 6) (12.0)], [(5, 5) (12.0)], [(6, 4) (12.0)], [(5, 6) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (6, 7), (3, 6), (5, 4) \\ \hline
-27 & \textbf{(4, 4)} & \textbf{(4, 5)} & [(4, 4) (12.0)], [(4, 6) (12.0)], [(5, 5) (12.0)], [(6, 4) (12.0)], [(5, 6) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (3, 6), (5, 4), (6, 3) \\ \hline
-28 & (4, 6) & None & [(4, 6) (12.0)], [(5, 5) (12.0)], [(6, 4) (12.0)], [(4, 5) (13.0)], [(5, 6) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (5, 4), (6, 3), (4, 4) \\ \hline
-29 & (5, 5) & (6, 5) & [(5, 5) (12.0)], [(6, 4) (12.0)], [(4, 5) (13.0)], [(5, 6) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (6, 3), (4, 4), (4, 6) \\ \hline
-30 & (6, 4) & None & [(6, 4) (12.0)], [(4, 5) (13.0)], [(5, 6) (13.0)], [(6, 5) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (4, 4), (4, 6), (5, 5) \\ \hline
-31 & \textbf{(4, 5)} & \textbf{(3, 5)} & [(4, 5) (13.0)], [(5, 6) (13.0)], [(6, 5) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (4, 6), (5, 5), (6, 4) \\ \hline
-32 & (5, 6) & None & [(5, 6) (13.0)], [(6, 5) (13.0)], [(3, 5) (14.0)], [(6, 6) (14.0)] & \dots, (5, 5), (6, 4), (4, 5) \\ \hline
-33 & (6, 5) & None & [(6, 5) (13.0)], [(3, 5) (14.0)], [(6, 6) (14.0)] & \dots, (6, 4), (4, 5), (5, 6) \\ \hline
-34 & \textbf{(3, 5)} & None (Meta) & [(3, 5) (14.0)], [(6, 6) (14.0)] & \dots, (4, 5), (5, 6), (6, 5) \\ \hline
+2 & (1, 3) & (2, 3), (1, 4) & [(2, 3) (2.0)], [(1, 4) (2.0)], [(1, 1) (4.0)] & (1, 2), (1, 3) \\ \hline
+3 & (2, 3) & (3, 3) & [(1, 4) (2.0)], [(3, 3) (3.0)], [(1, 1) (4.0)] & (1, 2), (1, 3), (2, 3) \\ \hline
+4 & (1, 4) & (1, 5) & [(3, 3) (3.0)], [(1, 5) (3.0)], [(1, 1) (4.0)] & (1, 2), (1, 3), (2, 3), (1, 4) \\ \hline
+5 & (3, 3) & (3, 2) & [(1, 5) (3.0)], [(1, 1) (4.0)], [(3, 2) (7.0)] & \dots, (2, 3), (1, 4), (3, 3) \\ \hline
+6 & (1, 5) & (1, 6) & [(1, 1) (4.0)], [(1, 6) (4.0)], [(3, 2) (7.0)] & \dots, (1, 4), (3, 3), (1, 5) \\ \hline
+7 & \textbf{(1, 1)} & \textbf{(2, 1)} & [(1, 6) (4.0)], [(2, 1) (5.0)], [(3, 2) (7.0)] & \dots, (3, 3), (1, 5), (1, 1) \\ \hline
+8 & (1, 6) & (1, 7) & [(2, 1) (5.0)], [(1, 7) (5.0)], [(3, 2) (7.0)] & \dots, (1, 5), (1, 1), (1, 6) \\ \hline
+9 & \textbf{(2, 1)} & \textbf{(3, 1)} & [(1, 7) (5.0)], [(3, 1) (6.0)], [(3, 2) (7.0)] & \dots, (1, 1), (1, 6), (2, 1) \\ \hline
+10 & (1, 7) & (2, 7) & [(3, 1) (6.0)], [(2, 7) (6.0)], [(3, 2) (7.0)] & \dots, (1, 6), (2, 1), (1, 7) \\ \hline
+11 & \textbf{(3, 1)} & \textbf{(4, 1)} & [(2, 7) (6.0)], [(3, 2) (7.0)], [(4, 1) (7.0)] & \dots, (2, 1), (1, 7), (3, 1) \\ \hline
+12 & (2, 7) & (3, 7) & [(3, 2) (7.0)], [(4, 1) (7.0)], [(3, 7) (7.0)] & \dots, (1, 7), (3, 1), (2, 7) \\ \hline
+13 & (3, 2) & None & [(4, 1) (7.0)], [(3, 7) (7.0)] & \dots, (3, 1), (2, 7), (3, 2) \\ \hline
+14 & \textbf{(4, 1)} & \textbf{(5, 1)} & [(3, 7) (7.0)], [(5, 1) (8.0)] & \dots, (2, 7), (3, 2), (4, 1) \\ \hline
+15 & (3, 7) & (4, 7), (3, 6) & [(5, 1) (8.0)], [(4, 7) (8.0)], [(3, 6) (11.0)] & \dots, (3, 2), (4, 1), (3, 7) \\ \hline
+16 & \textbf{(5, 1)} & (6, 1), \textbf{(5, 2)} & [(4, 7) (8.0)], [(5, 2) (9.0)], [(6, 1) (9.0)], [(3, 6) (11.0)] & \dots, (4, 1), (3, 7), (5, 1) \\ \hline
+17 & (4, 7) & (5, 7), (4, 6) & [(6, 1) (9.0)], [(5, 2) (9.0)], [(5, 7) (9.0)], [(3, 6) (11.0)], [(4, 6) (12.0)] & \dots, (3, 7), (5, 1), (4, 7) \\ \hline
+18 & (6, 1) & (6, 2) & [(5, 2) (9.0)], [(5, 7) (9.0)], [(6, 2) (10.0)], [(3, 6) (11.0)], [(4, 6) (12.0)] & \dots, (5, 1), (4, 7), (6, 1) \\ \hline
+19 & \textbf{(5, 2)} & \textbf{(5, 3)} & [(5, 7) (9.0)], [(6, 2) (10.0)], [(5, 3) (10.0)], [(3, 6) (11.0)], [(4, 6) (12.0)] & \dots, (4, 7), (6, 1), (5, 2) \\ \hline
+20 & (5, 7) & (6, 7), (5, 6) & [(6, 2) (10.0)], [(5, 3) (10.0)], [(6, 7) (10.0)], [(3, 6) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)] & \dots, (6, 1), (5, 2), (5, 7) \\ \hline
+21 & (6, 2) & (6, 3) & [(5, 3) (10.0)], [(6, 7) (10.0)], [(3, 6) (11.0)], [(6, 3) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)] & \dots, (5, 2), (5, 7), (6, 2) \\ \hline
+22 & \textbf{(5, 3)} & \textbf{(5, 4)} & [(6, 7) (10.0)], [(3, 6) (11.0)], [(6, 3) (11.0)], [(5, 4) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)] & \dots, (5, 7), (6, 2), (5, 3) \\ \hline
+23 & (6, 7) & (6, 6) & [(3, 6) (11.0)], [(6, 3) (11.0)], [(5, 4) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)], [(6, 6) (14.0)] & \dots, (6, 2), (5, 3), (6, 7) \\ \hline
+24 & (3, 6) & \textbf{(3, 5)} & [(5, 4) (11.0)], [(6, 3) (11.0)], [(4, 6) (12.0)], [(5, 6) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (5, 3), (6, 7), (3, 6) \\ \hline
+25 & \textbf{(5, 4)} & \textbf{(4, 4)}, (6, 4), (5, 5) & [(6, 3) (11.0)], [(4, 6) (12.0)], [(4, 4) (12.0)], [(5, 5) (12.0)], [(6, 4) (12.0)], [(5, 6) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (6, 7), (3, 6), (5, 4) \\ \hline
+26 & (6, 3) & None & [(4, 4) (12.0)], [(4, 6) (12.0)], [(5, 5) (12.0)], [(6, 4) (12.0)], [(5, 6) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (3, 6), (5, 4), (6, 3) \\ \hline
+27 & \textbf{(4, 4)} & \textbf{(4, 5)} & [(6, 4) (12.0)], [(4, 6) (12.0)], [(5, 5) (12.0)], [(5, 6) (13.0)], [(4, 5) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (5, 4), (6, 3), (4, 4) \\ \hline
+28 & (6, 4) & (6, 5) & [(4, 6) (12.0)], [(5, 5) (12.0)], [(5, 6) (13.0)], [(4, 5) (13.0)], [(6, 5) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (6, 3), (4, 4), (6, 4) \\ \hline
+29 & (4, 6) & None & [(5, 5) (12.0)], [(5, 6) (13.0)], [(4, 5) (13.0)], [(6, 5) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (4, 4), (6, 4), (4, 6) \\ \hline
+30 & (5, 5) & None & [(4, 5) (13.0)], [(5, 6) (13.0)], [(6, 5) (13.0)], [(6, 6) (14.0)], [(3, 5) (15.0)] & \dots, (6, 4), (4, 6), (5, 5) \\ \hline
+31 & \textbf{(4, 5)} & \textbf{(3, 5)} & [(6, 5) (13.0)], [(5, 6) (13.0)], [(6, 6) (14.0)], [(3, 5) (14.0)] & \dots, (4, 6), (5, 5), (4, 5) \\ \hline
+32 & (6, 5) & None & [(5, 6) (13.0)], [(6, 6) (14.0)], [(3, 5) (14.0)] & \dots, (5, 5), (4, 5), (6, 5) \\ \hline
+33 & (5, 6) & None & [(3, 5) (14.0)], [(6, 6) (14.0)] & \dots, (4, 5), (6, 5), (5, 6) \\ \hline
+34 & \textbf{(3, 5)} & None (Meta) & [(3, 5) (14.0)], [(6, 6) (14.0)] & \dots, (4, 5), (6, 5), (5, 6) \\ \hline
 }
 
 \section{Nodos expandidos - Búsqueda de Coste Uniforme (Caso 2)}
@@ -503,9 +446,9 @@ Para la heurística de Manhattan ponderada multiplicada por 2, la trazabilidad y
   \label{fig:exp_ucs_caso2}
 \end{figure}
 
-\section{Traza Búsqueda A* con Heurística 1 (Euclidiana)}
+\section{Traza Búsqueda A* con Heurística 1 (Manhattan)}
 \label{anx:a_star_ecli}
-\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 1 (Euclidiana)}{tab:iter_h_1_caso3}{
+\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 1 (Manhattan)}{tab:iter_h_1_caso3}{
 0 & - & - & [(1, 2) (5.0)] & - \\ \hline
 1 & (1, 2) [f=5.0] & (1, 3), (1, 1) & [(1, 3) (5.0)], [(1, 1) (10.0)] & (1, 2) \\ \hline
 2 & (1, 3) [f=5.0] & (2, 3), (1, 4) & [(2, 3) (5.0)], [(1, 4) (5.0)], [(1, 1) (10.0)] & (1, 2), (1, 3) \\ \hline
@@ -544,9 +487,9 @@ Para la heurística de Manhattan ponderada multiplicada por 2, la trazabilidad y
   \label{fig:exp_astar_h1}
 \end{figure}
 
-\section{Traza Búsqueda A* con Heurística 2 (Manhattan)}
+\section{Traza Búsqueda A* con Heurística 2 (Chebyshev)}
 \label{anx:a_star_man}
-\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 2 (Manhattan)}{tab:iter_h_2_caso3}{
+\tablaiteracionescoste{Traza de iteraciones - Algoritmo de Búsqueda A* con Heurística 2 (Chebyshev)}{tab:iter_h_2_caso3}{
 0 & - & - & [(1, 2) (3.0)] & - \\ \hline
 1 & (1, 2) [f=3.0] & (1, 3), (1, 1) & [(1, 3) (3.0)], [(1, 1) (8.0)] & (1, 2) \\ \hline
 2 & (1, 3) [f=3.0] & (2, 3), (1, 4) & [(2, 3) (4.0)], [(1, 4) (4.0)], [(1, 1) (8.0)] & (1, 2), (1, 3) \\ \hline
@@ -560,25 +503,25 @@ Para la heurística de Manhattan ponderada multiplicada por 2, la trazabilidad y
 10 & (2, 7) [f=8.0] & (3, 7) & [(2, 1) (9.0)], [(3, 7) (9.0)], [(3, 2) (10.0)] & \dots, (1, 7), (1, 1), (2, 7) \\ \hline
 11 & (2, 1) [f=9.0] & (3, 1) & [(3, 7) (9.0)], [(3, 2) (10.0)], [(3, 1) (10.0)] & \dots, (1, 1), (2, 7), (2, 1) \\ \hline
 12 & (3, 7) [f=9.0] & (4, 7), (3, 6) & [(3, 2) (10.0)], [(3, 1) (10.0)], [(4, 7) (10.0)], [(3, 6) (12.0)] & \dots, (2, 7), (2, 1), (3, 7) \\ \hline
-13 & (3, 2) [f=10.0] & None & [(3, 1) (10.0)], [(4, 7) (10.0)], [(3, 6) (12.0)] & \dots, (2, 1), (3, 7), (3, 2) \\ \hline
-14 & (3, 1) [f=10.0] & (4, 1) & [(4, 7) (10.0)], [(4, 1) (11.0)], [(3, 6) (12.0)] & \dots, (3, 7), (3, 2), (3, 1) \\ \hline
-15 & (4, 7) [f=10.0] & (5, 7), (4, 6) & [(4, 1) (11.0)], [(5, 7) (11.0)], [(3, 6) (12.0)], [(4, 6) (13.0)] & \dots, (3, 2), (3, 1), (4, 7) \\ \hline
-16 & (4, 1) [f=11.0] & (5, 1) & [(5, 7) (11.0)], [(3, 6) (12.0)], [(5, 1) (12.0)], [(4, 6) (13.0)] & \dots, (3, 1), (4, 7), (4, 1) \\ \hline
-17 & (5, 7) [f=11.0] & (6, 7), (5, 6) & [(3, 6) (12.0)], [(5, 1) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(5, 6) (15.0)] & \dots, (4, 7), (4, 1), (5, 7) \\ \hline
-18 & (3, 6) [f=12.0] & (3, 5) & [(5, 1) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(5, 6) (15.0)], [(3, 5) (15.0)] & \dots, (4, 1), (5, 7), (3, 6) \\ \hline
-19 & (5, 1) [f=12.0] & (6, 1), (5, 2) & [(5, 2) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(6, 1) (13.0)], [(5, 6) (15.0)], [(3, 5) (15.0)] & \dots, (5, 7), (3, 6), (5, 1) \\ \hline
+13 & (3, 2) [f=10.0] & None & [(4, 7) (10.0)], [(3, 1) (10.0)], [(3, 6) (12.0)] & \dots, (2, 1), (3, 7), (3, 2) \\ \hline
+14 & (4, 7) [f=10.0] & (5, 7), (4, 6) & [(3, 1) (10.0)], [(5, 7) (11.0)], [(3, 6) (12.0)], [(4, 6) (13.0)] & \dots, (3, 7), (3, 2), (4, 7) \\ \hline
+15 & (3, 1) [f=10.0] & (4, 1) & [(5, 7) (11.0)], [(4, 1) (11.0)], [(3, 6) (12.0)], [(4, 6) (13.0)] & \dots, (3, 2), (4, 7), (3, 1) \\ \hline
+16 & (5, 7) [f=11.0] & (6, 7), (5, 6) & [(4, 1) (11.0)], [(3, 6) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(5, 6) (15.0)] & \dots, (4, 7), (3, 1), (5, 7) \\ \hline
+17 & (4, 1) [f=11.0] & (5, 1) & [(3, 6) (12.0)], [(5, 1) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(5, 6) (15.0)] & \dots, (3, 1), (5, 7), (4, 1) \\ \hline
+18 & (3, 6) [f=12.0] & (3, 5) & [(5, 1) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(5, 6) (15.0)], [(3, 5) (15.0)] & \dots, (5, 7), (4, 1), (3, 6) \\ \hline
+19 & (5, 1) [f=12.0] & (6, 1), (5, 2) & [(5, 2) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(6, 1) (13.0)], [(5, 6) (15.0)], [(3, 5) (15.0)] & \dots, (4, 1), (3, 6), (5, 1) \\ \hline
 20 & (5, 2) [f=12.0] & (6, 2), (5, 3) & [(5, 3) (12.0)], [(4, 6) (13.0)], [(6, 7) (13.0)], [(6, 1) (13.0)], [(6, 2) (13.0)], [(5, 6) (15.0)], [(3, 5) (15.0)] & \dots, (3, 6), (5, 1), (5, 2) \\ \hline
 21 & (5, 3) [f=12.0] & (6, 3), (5, 4) & [(4, 6) (13.0)], [(6, 7) (13.0)], [(6, 1) (13.0)], [(6, 2) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)] & \dots, (5, 1), (5, 2), (5, 3) \\ \hline
-22 & (4, 6) [f=13.0] & (4, 5) & [(6, 7) (13.0)], [(6, 1) (13.0)], [(6, 2) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)] & \dots, (5, 2), (5, 3), (4, 6) \\ \hline
-23 & (6, 7) [f=13.0] & (6, 6) & [(6, 1) (13.0)], [(6, 2) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (5, 3), (4, 6), (6, 7) \\ \hline
-24 & (6, 1) [f=13.0] & None & [(6, 2) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (4, 6), (6, 7), (6, 1) \\ \hline
-25 & (6, 2) [f=13.0] & None & [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (6, 7), (6, 1), (6, 2) \\ \hline
-26 & (5, 4) [f=13.0] & (4, 4), (6, 4), (5, 5) & [(4, 4) (13.0)], [(6, 3) (14.0)], [(5, 5) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (6, 1), (6, 2), (5, 4) \\ \hline
-27 & (4, 4) [f=13.0] & (4, 5) & [(6, 3) (14.0)], [(5, 5) (14.0)], [(4, 5) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(6, 6) (17.0)] & \dots, (6, 2), (5, 4), (4, 4) \\ \hline
-28 & (6, 3) [f=14.0] & None & [(5, 5) (14.0)], [(4, 5) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(6, 6) (17.0)] & \dots, (5, 4), (4, 4), (6, 3) \\ \hline
-29 & (5, 5) [f=14.0] & (6, 5) & [(4, 5) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (4, 4), (6, 3), (5, 5) \\ \hline
-30 & (4, 5) [f=14.0] & (3, 5) & [(3, 5) (14.0)], [(5, 6) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (6, 3), (5, 5), (4, 5) \\ \hline
-31 & (3, 5) [f=14.0] & None (Meta) & [(3, 5) (14.0)], [(5, 6) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (6, 3), (5, 5), (4, 5) \\ \hline
+22 & (4, 6) [f=13.0] & (4, 5) & [(6, 2) (13.0)], [(6, 7) (13.0)], [(6, 1) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)] & \dots, (5, 2), (5, 3), (4, 6) \\ \hline
+23 & (6, 2) [f=13.0] & None & [(6, 7) (13.0)], [(6, 1) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)] & \dots, (5, 3), (4, 6), (6, 2) \\ \hline
+24 & (6, 7) [f=13.0] & (6, 6) & [(6, 1) (13.0)], [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (4, 6), (6, 2), (6, 7) \\ \hline
+25 & (6, 1) [f=13.0] & None & [(5, 4) (13.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (6, 2), (6, 7), (6, 1) \\ \hline
+26 & (5, 4) [f=13.0] & (4, 4), (6, 4), (5, 5) & [(4, 4) (13.0)], [(6, 3) (14.0)], [(5, 5) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(4, 5) (17.0)], [(6, 6) (17.0)] & \dots, (6, 7), (6, 1), (5, 4) \\ \hline
+27 & (4, 4) [f=13.0] & (4, 5) & [(5, 5) (14.0)], [(6, 3) (14.0)], [(4, 5) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(6, 6) (17.0)] & \dots, (6, 1), (5, 4), (4, 4) \\ \hline
+28 & (5, 5) [f=14.0] & (6, 5) & [(4, 5) (14.0)], [(6, 3) (14.0)], [(5, 6) (15.0)], [(3, 5) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (5, 4), (4, 4), (5, 5) \\ \hline
+29 & (4, 5) [f=14.0] & (3, 5) & [(6, 3) (14.0)], [(3, 5) (14.0)], [(5, 6) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (4, 4), (5, 5), (4, 5) \\ \hline
+30 & (6, 3) [f=14.0] & None & [(3, 5) (14.0)], [(5, 6) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (5, 5), (4, 5), (6, 3) \\ \hline
+31 & (3, 5) [f=14.0] & None (Meta) & [(3, 5) (14.0)], [(5, 6) (15.0)], [(6, 4) (15.0)], [(6, 5) (16.0)], [(6, 6) (17.0)] & \dots, (5, 5), (4, 5), (6, 3) \\ \hline
 }
 
 \section{Nodos expandidos - A* con Heurística 2 (Caso 3)}
